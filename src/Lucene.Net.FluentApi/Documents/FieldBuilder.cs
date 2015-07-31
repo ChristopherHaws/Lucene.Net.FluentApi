@@ -21,7 +21,7 @@ namespace Lucene.Net.Documents
 				throw new ArgumentNullException(nameof(document));
 			}
 
-			if (string.IsNullOrWhiteSpace(this.name))
+			if (string.IsNullOrWhiteSpace(name))
 			{
 				throw new ArgumentException("Value must not be null or whitespace", nameof(name));
 			}
@@ -77,12 +77,17 @@ namespace Lucene.Net.Documents
 			this.document.Add(new NumericField(this.name, this.store, this.index != Field.Index.NO).SetDoubleValue(value));
 		}
 
+		public void Value(Boolean value)
+		{
+			this.Value(value ? 1 : 0);
+		}
+
 		public void Value(DateTime value)
 		{
 			this.Value(value.Ticks);
 		}
 
-		public void Value(Object value)
+		public void SerializedValue(Object value)
 		{
 			if (value == null)
 			{

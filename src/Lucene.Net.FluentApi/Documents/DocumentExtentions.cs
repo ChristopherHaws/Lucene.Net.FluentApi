@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Lucene.Net.Documents
 {
@@ -9,10 +10,37 @@ namespace Lucene.Net.Documents
 			return new FieldBuilder(document, name);
 		}
 
-		public static String GetValue(this Document document, String name)
+		public static String GetString(this Document document, String name)
 		{
 			return document.Get(name);
 		}
+
+		public static Int32 GetInt32(this Document document, String name)
+		{
+			var result = document.GetInt32OrNull(name);
+
+			if (!result.HasValue)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result.Value;
+		}
+
+		public static Int32? GetInt32OrNull(this Document document, String name)
+		{
+			var value = document.Get(name);
+
+			Int32 result;
+
+			if (!Int32.TryParse(value, out result))
+			{
+				return null;
+			}
+
+			return result;
+		}
+
 		public static DateTime GetDateTime(this Document document, String name, DateTimeKind kind)
 		{
 			var result = document.GetDateTimeOrNull(name, kind);
@@ -29,17 +57,17 @@ namespace Lucene.Net.Documents
 		{
 			var value = document.Get(name);
 
-			DateTime result;
+			Int64 result;
 
-			if (!DateTime.TryParse(value, out result))
+			if (!Int64.TryParse(value, out result))
 			{
 				return null;
 			}
 
-			return new DateTime(result.Ticks, kind);
+			return new DateTime(result, kind);
 		}
 
-		public static Boolean GetBoolean(this Document document, String name, DateTimeKind kind)
+		public static Boolean GetBoolean(this Document document, String name)
 		{
 			var result = document.GetBooleanOrNull(name);
 
@@ -54,6 +82,12 @@ namespace Lucene.Net.Documents
 		public static Boolean? GetBooleanOrNull(this Document document, String name)
 		{
 			var value = document.Get(name);
+
+			if (new[] { "0", "1" }.Contains(value))
+			{
+				return value == "1";
+			}
+
 			Boolean result;
 
 			if(!Boolean.TryParse(value, out result))
