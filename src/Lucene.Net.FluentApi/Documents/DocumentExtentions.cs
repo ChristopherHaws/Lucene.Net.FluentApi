@@ -12,6 +12,17 @@ namespace Lucene.Net.Documents
 
 		public static String GetString(this Document document, String name)
 		{
+			var result = document.Get(name);
+
+			if (result == null)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result;
+		}
+		public static String GetStringOrNull(this Document document, String name)
+		{
 			return document.Get(name);
 		}
 
@@ -34,6 +45,32 @@ namespace Lucene.Net.Documents
 			Int32 result;
 
 			if (!Int32.TryParse(value, out result))
+			{
+				return null;
+			}
+
+			return result;
+		}
+
+		public static Int64 GetInt64(this Document document, String name)
+		{
+			var result = document.GetInt64OrNull(name);
+
+			if (!result.HasValue)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result.Value;
+		}
+
+		public static Int64? GetInt64OrNull(this Document document, String name)
+		{
+			var value = document.Get(name);
+
+			Int64 result;
+
+			if (!Int64.TryParse(value, out result))
 			{
 				return null;
 			}

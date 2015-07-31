@@ -1,0 +1,21 @@
+{
+	"version": "0.1.0-*",
+	"description": "Fluent API for Lucene.Net",
+	"authors": [ "Christopher Haws" ],
+	"tags": [ "lucene.net", "core", "text", "search", "information", "retrieval", "lucene", "apache" ],
+	"projectUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi",
+	"licenseUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi/blob/master/LICENSE",
+
+	"dependencies": {
+		"System.Collections": "4.0.10-beta-23019",
+		"System.Linq": "4.0.0-beta-23019",
+		"System.Threading": "4.0.10-beta-23019",
+		"System.Runtime": "4.0.10-beta-23019",
+		"Microsoft.CSharp": "4.0.0-beta-23019",
+		"Lucene.Net": "3.0.3"
+	},
+
+	"frameworks": {
+		"dnx451": { }
+	}
+}
