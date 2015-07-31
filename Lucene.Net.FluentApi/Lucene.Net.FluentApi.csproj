@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extentions\ObjectExtentions.cs" />
     <Compile Include="Sample.cs" />
     <Compile Include="Documents\DocumentExtentions.cs" />
     <Compile Include="Documents\FieldBuilder.cs" />

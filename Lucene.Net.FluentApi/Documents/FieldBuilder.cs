@@ -1,9 +1,13 @@
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Lucene.Net.Documents
 {
 	public class FieldBuilder
 	{
+		private static readonly BinaryFormatter BinaryFormatter = new BinaryFormatter();
+
 		private readonly Document document;
 		private readonly String name;
 		private Field.Store store;
@@ -69,7 +73,52 @@ namespace Lucene.Net.Documents
 
 		public void Value(Object value)
 		{
-			
+			if (value == null)
+			{
+				throw new ArgumentNullException(nameof(value));
+			}
+
+			if (string.IsNullOrWhiteSpace(this.name))
+			{
+				throw new ArgumentException("fieldName must not be null or whitespace", "fieldName");
+			}
+
+			byte[] valueBytes = BinarySerialize(value);
+			doc.Add(new Field(fieldName, valueBytes, Field.Store.YES));
+			return doc;
+		}
+		
+		private byte[] BinarySerialize(object input)
+		{
+			if (input == null)
+			{
+				return null;
+			}
+
+			using (var stream = new MemoryStream())
+			{
+				BinaryFormatter.Serialize(stream, input);
+				return stream.ToArray();
+			}
+		}
+		
+		private T BinaryDeserialize<T>(byte[] input)
+		{
+			if (input == null)
+			{
+				return default(T);
+			}
+
+			using (var ms = new MemoryStream(input))
+			{
+				var value = BinaryFormatter.Deserialize(ms);
+				if (value is T)
+				{
+					return (T)value;
+				}
+
+				return default(T);
+			}
 		}
 	}
 }
