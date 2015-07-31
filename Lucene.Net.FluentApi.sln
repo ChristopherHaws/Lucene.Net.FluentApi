@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lucene.Net.FluentApi", "Lucene.Net.FluentApi\Lucene.Net.FluentApi.csproj", "{A659C4D0-C2EC-41C7-9AAF-D1D3C0A517AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DECBA731-FDBD-42B6-A0F0-42461C961B79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{201733B4-E3A8-4950-95F0-318D6F710886}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Lucene.Net.FluentApi", "src\Lucene.Net.FluentApi\Lucene.Net.FluentApi.xproj", "{384C0722-DF9A-4165-AE27-19CBBE6124EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +18,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A659C4D0-C2EC-41C7-9AAF-D1D3C0A517AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A659C4D0-C2EC-41C7-9AAF-D1D3C0A517AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A659C4D0-C2EC-41C7-9AAF-D1D3C0A517AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A659C4D0-C2EC-41C7-9AAF-D1D3C0A517AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{384C0722-DF9A-4165-AE27-19CBBE6124EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{384C0722-DF9A-4165-AE27-19CBBE6124EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{384C0722-DF9A-4165-AE27-19CBBE6124EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{384C0722-DF9A-4165-AE27-19CBBE6124EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{384C0722-DF9A-4165-AE27-19CBBE6124EC} = {DECBA731-FDBD-42B6-A0F0-42461C961B79}
 	EndGlobalSection
 EndGlobal

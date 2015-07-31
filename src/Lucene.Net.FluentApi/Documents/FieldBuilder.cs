@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Lucene.Net.Extentions;
 
 namespace Lucene.Net.Documents
 {
@@ -15,6 +16,16 @@ namespace Lucene.Net.Documents
 
 		public FieldBuilder(Document document, String name)
 		{
+			if (document == null)
+			{
+				throw new ArgumentNullException(nameof(document));
+			}
+
+			if (string.IsNullOrWhiteSpace(this.name))
+			{
+				throw new ArgumentException("Value must not be null or whitespace", nameof(name));
+			}
+
 			this.document = document;
 			this.name = name;
 			this.store = Field.Store.NO;
@@ -78,47 +89,8 @@ namespace Lucene.Net.Documents
 				throw new ArgumentNullException(nameof(value));
 			}
 
-			if (string.IsNullOrWhiteSpace(this.name))
-			{
-				throw new ArgumentException("fieldName must not be null or whitespace", "fieldName");
-			}
-
-			byte[] valueBytes = BinarySerialize(value);
-			doc.Add(new Field(fieldName, valueBytes, Field.Store.YES));
-			return doc;
-		}
-		
-		private byte[] BinarySerialize(object input)
-		{
-			if (input == null)
-			{
-				return null;
-			}
-
-			using (var stream = new MemoryStream())
-			{
-				BinaryFormatter.Serialize(stream, input);
-				return stream.ToArray();
-			}
-		}
-		
-		private T BinaryDeserialize<T>(byte[] input)
-		{
-			if (input == null)
-			{
-				return default(T);
-			}
-
-			using (var ms = new MemoryStream(input))
-			{
-				var value = BinaryFormatter.Deserialize(ms);
-				if (value is T)
-				{
-					return (T)value;
-				}
-
-				return default(T);
-			}
+			var valueBytes = value.BinarySerialize();
+			this.document.Add(new Field(this.name, valueBytes, Field.Store.YES));
 		}
 	}
 }
