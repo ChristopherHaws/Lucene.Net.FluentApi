@@ -12,7 +12,7 @@
         "System.Threading": "4.0.10-beta-*",
         "System.Runtime": "4.0.10-beta-*",
         "Microsoft.CSharp": "4.0.0-beta-*",
-        "Lucene.Net.FluentApi": "0.1.0-*",
+        "Lucene.Net.FluentApi": "",
 		"Lucene.Net": "3.0.3",
 		"xunit": "2.1.0-beta3-*",
 		"xunit.runner.dnx": "2.1.0-beta3-*"
