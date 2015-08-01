@@ -1,26 +1,26 @@
 {
-    "version": "1.0.0-*",
-    "description": "Tests for Lucene.Net.FluentApi",
-    "authors": [ "Christopher Haws" ],
-    "tags": [ "lucene.net", "core", "text", "search", "information", "retrieval", "lucene", "apache" ],
-    "projectUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi",
-    "licenseUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi/blob/master/LICENSE",
+	"version": "1.0.0-*",
+	"description": "Tests for Lucene.Net.FluentApi",
+	"authors": [ "Christopher Haws" ],
+	"tags": [ "lucene.net", "core", "text", "search", "information", "retrieval", "lucene", "apache" ],
+	"projectUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi",
+	"licenseUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi/blob/master/LICENSE",
 
-    "dependencies": {
-        "System.Collections": "4.0.10-beta-*",
-        "System.Linq": "4.0.0-beta-*",
-        "System.Threading": "4.0.10-beta-*",
-        "System.Runtime": "4.0.10-beta-*",
-        "Microsoft.CSharp": "4.0.0-beta-*",
-        "Lucene.Net.FluentApi": "",
+	"dependencies": {
+		"System.Collections": "4.0.10-beta-*",
+		"System.Linq": "4.0.0-beta-*",
+		"System.Threading": "4.0.10-beta-*",
+		"System.Runtime": "4.0.10-beta-*",
+		"Microsoft.CSharp": "4.0.0-beta-*",
 		"Lucene.Net": "3.0.3",
 		"xunit": "2.1.0-beta3-*",
-		"xunit.runner.dnx": "2.1.0-beta3-*"
-    },
+		"xunit.runner.dnx": "2.1.0-beta3-*",
+		"Lucene.Net.FluentApi": "0.1.0-*"
+	},
 	"commands": {
 		"test": "xunit.runner.dnx"
 	},
-    "frameworks": {
-        "dnx451": { }
-    }
+	"frameworks": {
+		"dnx451": { }
+	}
 }
