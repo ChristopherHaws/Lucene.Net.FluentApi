@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace Lucene.Net.Documents
@@ -76,6 +77,78 @@ namespace Lucene.Net.Documents
 			}
 
 			return result;
+		}
+
+		public static Single GetSingle(this Document document, String name)
+		{
+			var result = document.GetSingleOrNull(name);
+
+			if (!result.HasValue)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result.Value;
+		}
+
+		public static Single? GetSingleOrNull(this Document document, String name)
+		{
+			var value = document.Get(name);
+
+			Single result;
+
+			if (Single.TryParse(value, out result))
+			{
+				return result;
+			}
+
+			if (value == Single.MaxValue.ToString(CultureInfo.InvariantCulture))
+			{
+				return Single.MaxValue;
+			}
+
+			if (value == Single.MinValue.ToString(CultureInfo.InvariantCulture))
+			{
+				return Single.MinValue;
+			}
+
+			return null;
+		}
+
+		public static Double GetDouble(this Document document, String name)
+		{
+			var result = document.GetDoubleOrNull(name);
+
+			if (!result.HasValue)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result.Value;
+		}
+
+		public static Double? GetDoubleOrNull(this Document document, String name)
+		{
+			var value = document.Get(name);
+
+			Double result;
+
+			if (Double.TryParse(value, out result))
+			{
+				return result;
+			}
+
+			if (value == Double.MaxValue.ToString(CultureInfo.InvariantCulture))
+			{
+				return Double.MaxValue;
+			}
+
+			if (value == Double.MinValue.ToString(CultureInfo.InvariantCulture))
+			{
+				return Double.MinValue;
+			}
+
+			return null;
 		}
 
 		public static DateTime GetDateTime(this Document document, String name, DateTimeKind kind)

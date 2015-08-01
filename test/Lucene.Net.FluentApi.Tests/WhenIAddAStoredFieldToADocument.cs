@@ -35,6 +35,48 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
+		public void ThenIWantSingleFieldsToBeStored()
+		{
+			// Arrange
+			var document = new Document();
+			var value = Single.MaxValue;
+
+			// Act
+			document.AddField("Foo").Stored().Value(value);
+
+			// Assert
+			Assert.Equal(value, document.GetSingle("Foo"));
+		}
+
+		[Fact]
+		public void ThenIWantDoubleFieldsToBeStored()
+		{
+			// Arrange
+			var document = new Document();
+			var value = Double.MaxValue;
+
+			// Act
+			document.AddField("Foo").Stored().Value(value);
+
+			// Assert
+			Assert.Equal(value, document.GetDouble("Foo"));
+		}
+
+		[Fact]
+		public void ThenIWantInt64FieldsToBeStored()
+		{
+			// Arrange
+			var document = new Document();
+			var value = Int64.MaxValue;
+
+			// Act
+			document.AddField("Foo").Stored().Value(value);
+
+			// Assert
+			Assert.Equal(value, document.GetInt64("Foo"));
+		}
+
+		[Fact]
 		public void ThenIWantDateTimeFieldsToBeStored()
 		{
 			// Arrange
