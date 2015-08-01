@@ -4,12 +4,9 @@
 # load up the global.json so we can find the DNX version
 $globalJson = Get-Content -Path $PSScriptRoot\global.json -Raw -ErrorAction Ignore | ConvertFrom-Json -ErrorAction Ignore
 
-if($globalJson)
-{
+if($globalJson) {
     $dnxVersion = $globalJson.sdk.version
-}
-else
-{
+} else {
     Write-Warning "Unable to locate global.json to determine using 'latest'"
     $dnxVersion = "latest"
 }
@@ -23,4 +20,30 @@ else
  # run DNU restore on all project.json files in the src folder including 2>1 to redirect stderr to stdout for badly behaved tools
 Get-ChildItem -Path $PSScriptRoot\src -Filter project.json -Recurse | ForEach-Object { & dnu restore $_.FullName 2>1 }
 
-NuGet restore
+$globalNugetPath = "$env:LocalAppData\NuGet"
+
+$globalNugetExists = Test-Path "$globalNugetPath\NuGet.exe"
+if(!$globalNugetExists) {
+	Write-Information "Downloading latest version of NuGet.exe..."
+
+	$globalNugetFolderExists = Test-Path $globalNugetPath
+	if(!$globalNugetFolderExists) {
+		New-Item -ItemType Directory -Path $globalNugetPath
+	}
+
+	$ProgressPreference = 'SilentlyContinue';
+	Invoke-WebRequest 'https://www.nuget.org/nuget.exe' -OutFile "$globalNugetPath\NuGet.exe"
+}
+
+$localNugetPath = ".NuGet"
+$nugetExists = Test-Path "$localNugetPath\NuGet.exe"
+if(!$nugetExists) {
+	$nugetFolderExists = Test-Path $localNugetPath
+	if(!$nugetFolderExists) {
+		New-Item -ItemType Directory -Path $localNugetPath
+	}
+
+	Copy-Item "$globalNugetPath\NuGet.exe" "$localNugetPath"
+}
+
+.nuget\NuGet.exe restore
