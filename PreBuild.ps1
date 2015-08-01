@@ -24,7 +24,7 @@ $globalNugetPath = "$env:LocalAppData\NuGet"
 
 $globalNugetExists = Test-Path "$globalNugetPath\NuGet.exe"
 if(!$globalNugetExists) {
-	Write-Information "Downloading latest version of NuGet.exe..."
+	Write-Host "Downloading latest version of NuGet.exe..."
 
 	$globalNugetFolderExists = Test-Path $globalNugetPath
 	if(!$globalNugetFolderExists) {
