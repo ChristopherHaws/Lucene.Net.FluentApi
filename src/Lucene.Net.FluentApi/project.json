@@ -7,11 +7,11 @@
 	"licenseUrl": "https://github.com/ChristopherHaws/Lucene.Net.FluentApi/blob/master/LICENSE",
 
 	"dependencies": {
-		"System.Collections": "4.0.10-beta-23019",
-		"System.Linq": "4.0.0-beta-23019",
-		"System.Threading": "4.0.10-beta-23019",
-		"System.Runtime": "4.0.10-beta-23019",
-		"Microsoft.CSharp": "4.0.0-beta-23019",
+		"System.Collections": "4.0.10-beta-*",
+		"System.Linq": "4.0.0-beta-*",
+		"System.Threading": "4.0.10-beta-*",
+		"System.Runtime": "4.0.10-beta-*",
+		"Microsoft.CSharp": "4.0.0-beta-*",
 		"Lucene.Net": "3.0.3"
 	},
 
