@@ -33,13 +33,13 @@ namespace Lucene.Net.FluentApi.Tests
 			// Assert
 			Assert.Equal(value, document.GetInt32("Foo"));
 		}
-
-		[Fact(Skip = "Single is not working yet.")]
+		
+		[Fact]
 		public void ThenIWantSingleFieldsToBeStored()
 		{
 			// Arrange
 			var document = new Document();
-			var value = Single.MaxValue;
+			var value = 50156.60f;
 
 			// Act
 			document.AddField("Foo").Stored().Value(value);

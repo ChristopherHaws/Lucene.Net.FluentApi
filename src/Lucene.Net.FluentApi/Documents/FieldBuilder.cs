@@ -1,14 +1,10 @@
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Lucene.Net.Extentions;
 
 namespace Lucene.Net.Documents
 {
 	public class FieldBuilder
 	{
-		private static readonly BinaryFormatter BinaryFormatter = new BinaryFormatter();
-
 		private readonly Document document;
 		private readonly String name;
 		private Field.Store store;
