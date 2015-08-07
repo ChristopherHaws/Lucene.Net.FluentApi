@@ -11,6 +11,36 @@ namespace Lucene.Net.Documents
 			return new FieldBuilder(document, name);
 		}
 
+		public static Int32FieldBuilder Add(this Document document, Int32 value)
+		{
+			return new Int32FieldBuilder(document, value);
+		}
+
+		public static Int64FieldBuilder Add(this Document document, Int64 value)
+		{
+			return new Int64FieldBuilder(document, value);
+		}
+
+		public static BooleanFieldBuilder Add(this Document document, Boolean value)
+		{
+			return new BooleanFieldBuilder(document, value);
+		}
+
+		public static SingleFieldBuilder Add(this Document document, Single value)
+		{
+			return new SingleFieldBuilder(document, value);
+		}
+
+		public static DoubleFieldBuilder Add(this Document document, Double value)
+		{
+			return new DoubleFieldBuilder(document, value);
+		}
+
+		public static DateTimeFieldBuilder Add(this Document document, DateTime value)
+		{
+			return new DateTimeFieldBuilder(document, value);
+		}
+
 		public static String GetString(this Document document, String name)
 		{
 			var result = document.Get(name);
