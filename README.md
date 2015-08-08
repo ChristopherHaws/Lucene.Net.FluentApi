@@ -36,4 +36,8 @@ document.GetBoolean("MyBoolean");
 // DateTime
 document.Add(DateTime.UtcNow).Stored().Indexed().As("MyDateTime");
 document.GetDateTime("MyDateTime", DateTimeKind.Utc);
+
+// Boosted String
+document.Add("Foo").Stored().Indexed().Analyzed().BoostBy(5.0f).As("MyBoostedString");
+document.GetString("MyBoostedString");
 ```
