@@ -1,15 +1,10 @@
-using System;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {
-	public interface ISerializedObjectFieldBuilder : IFieldBuilder
+	public interface ISerializedObjectFieldBuilder :
+		IFieldBuilder,
+		ICanBeCompressedWithOffsetAndLength<ISerializedObjectFieldBuilder>
 	{
-		ISerializedObjectFieldBuilder WithCompression();
-
-		ISerializedObjectFieldBuilder WithCompression(Int32 compressionLevel);
-
-		ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length);
-
-		ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length, Int32 compressionLevel);
 	}
 }

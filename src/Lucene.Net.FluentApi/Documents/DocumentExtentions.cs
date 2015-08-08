@@ -7,42 +7,42 @@ namespace Lucene.Net.Documents
 {
 	public static class DocumentExtentions
 	{
-		public static StringFieldBuilder Add(this Document document, String value)
+		public static IStringFieldBuilder Add(this Document document, String value)
 		{
 			return new StringFieldBuilder(document, value);
 		}
 
-		public static Int32FieldBuilder Add(this Document document, Int32 value)
+		public static INumericFieldBuilder<Int32> Add(this Document document, Int32 value)
 		{
 			return new Int32FieldBuilder(document, value);
 		}
 
-		public static Int64FieldBuilder Add(this Document document, Int64 value)
+		public static INumericFieldBuilder<Int64> Add(this Document document, Int64 value)
 		{
 			return new Int64FieldBuilder(document, value);
 		}
 
-		public static BooleanFieldBuilder Add(this Document document, Boolean value)
+		public static INumericFieldBuilder<Boolean> Add(this Document document, Boolean value)
 		{
 			return new BooleanFieldBuilder(document, value);
 		}
 
-		public static SingleFieldBuilder Add(this Document document, Single value)
+		public static INumericFieldBuilder<Single> Add(this Document document, Single value)
 		{
 			return new SingleFieldBuilder(document, value);
 		}
 
-		public static DoubleFieldBuilder Add(this Document document, Double value)
+		public static INumericFieldBuilder<Double> Add(this Document document, Double value)
 		{
 			return new DoubleFieldBuilder(document, value);
 		}
 
-		public static DateTimeFieldBuilder Add(this Document document, DateTime value)
+		public static INumericFieldBuilder<DateTime> Add(this Document document, DateTime value)
 		{
 			return new DateTimeFieldBuilder(document, value);
 		}
 
-		public static SerializedObjectFieldBuilder Add(this Document document, Object value)
+		public static ISerializedObjectFieldBuilder Add(this Document document, Object value)
 		{
 			return new SerializedObjectFieldBuilder(document, value);
 		}

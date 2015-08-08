@@ -1,11 +1,16 @@
-using System;
-
 namespace Lucene.Net.Fluent.Documents.FieldProperties
 {
 	public interface ICanBeCompressed<out TResult>
 	{
+		/// <summary>
+		/// Compresses the entire value with the best compression level.
+		/// </summary>
 		TResult WithCompression();
 
-		TResult WithCompression(Int32 compressionLevel);
+		/// <summary>
+		/// Compresses the entire value with the provided compression level.
+		/// </summary>
+		/// <param name="compressionLevel">The compression level</param>
+		TResult WithCompression(CompressionLevel compressionLevel);
 	}
 }

@@ -1,5 +1,6 @@
 using System;
 using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 using Lucene.Net.Fluent.Documents.FieldPropertyBuilders;
 using Lucene.Net.Fluent.Extentions;
 
@@ -33,7 +34,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 			return this.compressionBuilder.WithCompression();
 		}
 
-		public ISerializedObjectFieldBuilder WithCompression(Int32 compressionLevel)
+		public ISerializedObjectFieldBuilder WithCompression(CompressionLevel compressionLevel)
 		{
 			return this.compressionBuilder.WithCompression(compressionLevel);
 		}
@@ -43,7 +44,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 			return this.compressionBuilder.WithCompression(offset, length);
 		}
 
-		public ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length, Int32 compressionLevel)
+		public ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length, CompressionLevel compressionLevel)
 		{
 			return this.compressionBuilder.WithCompression(offset, length, compressionLevel);
 		}

@@ -4,8 +4,14 @@ namespace Lucene.Net.Fluent.Documents.FieldProperties
 {
 	public interface ICanBeCompressedWithOffsetAndLength<out TResult> : ICanBeCompressed<TResult>
 	{
+		/// <summary>
+		/// Compresses the specified byte range with the best compression level.
+		/// </summary>
 		TResult WithCompression(Int32 offset, Int32 length);
-
-		TResult WithCompression(Int32 offset, Int32 length, Int32 compressionLevel);
+		
+		/// <summary>
+		/// Compresses the specified byte range with the provided compression level.
+		/// </summary>
+		TResult WithCompression(Int32 offset, Int32 length, CompressionLevel compressionLevel);
 	}
 }

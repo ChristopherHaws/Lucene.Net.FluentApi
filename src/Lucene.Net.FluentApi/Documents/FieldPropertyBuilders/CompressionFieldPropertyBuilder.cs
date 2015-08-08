@@ -1,6 +1,7 @@
 using System;
 using Lucene.Net.Documents;
 using Lucene.Net.Fluent.Documents.FieldBuilders;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
@@ -9,7 +10,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 		private readonly TFieldBuilder fieldBuilder;
 		private Int32? offset;
 		private Int32? length;
-		private Int32? compressionLevel;
+		private CompressionLevel? compressionLevel;
 
 		public CompressionFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
@@ -24,7 +25,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 			return this.fieldBuilder;
 		}
 
-		public TFieldBuilder WithCompression(Int32 compressionLevel)
+		public TFieldBuilder WithCompression(CompressionLevel compressionLevel)
 		{
 			this.compressionLevel = compressionLevel;
 			return this.fieldBuilder;
@@ -37,7 +38,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 			return this.fieldBuilder;
 		}
 
-		public TFieldBuilder WithCompression(Int32 offset, Int32 length, Int32 compressionLevel)
+		public TFieldBuilder WithCompression(Int32 offset, Int32 length, CompressionLevel compressionLevel)
 		{
 			this.offset = offset;
 			this.length = length;
@@ -54,7 +55,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 
 			if (this.compressionLevel.HasValue)
 			{
-				return CompressionTools.Compress(value, this.offset ?? 0, this.length ?? value.Length, this.compressionLevel.Value);
+				return CompressionTools.Compress(value, this.offset ?? 0, this.length ?? value.Length, (Int32)this.compressionLevel.Value);
 			}
 
 			return !this.offset.HasValue && !this.length.HasValue
@@ -71,7 +72,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 
 			return !this.compressionLevel.HasValue
 				? CompressionTools.CompressString(value)
-				: CompressionTools.CompressString(value, this.compressionLevel.Value);
+				: CompressionTools.CompressString(value, (Int32)this.compressionLevel.Value);
 		}
 	}
 }

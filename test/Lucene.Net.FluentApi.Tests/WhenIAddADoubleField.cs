@@ -1,4 +1,3 @@
-using System;
 using Lucene.Net.Documents;
 using Xunit;
 

@@ -1,5 +1,6 @@
 using System;
 using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 using Lucene.Net.Fluent.Documents.FieldPropertyBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
@@ -87,7 +88,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 			return this.compressionBuilder.WithCompression();
 		}
 
-		public IStringFieldBuilder WithCompression(Int32 compressionLevel)
+		public IStringFieldBuilder WithCompression(CompressionLevel compressionLevel)
 		{
 			return this.compressionBuilder.WithCompression(compressionLevel);
 		}
