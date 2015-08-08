@@ -67,9 +67,9 @@ namespace Lucene.Net.Documents
 			return document.Get(name);
 		}
 
-		public static String GetCompressedString(this Document document, String name)
+		public static String GetStringWithCompression(this Document document, String name)
 		{
-			var result = document.GetCompressedStringOrNull(name);
+			var result = document.GetStringWithCompressionOrNull(name);
 
 			if (result == null)
 			{
@@ -79,7 +79,7 @@ namespace Lucene.Net.Documents
 			return result;
 		}
 
-		public static String GetCompressedStringOrNull(this Document document, String name)
+		public static String GetStringWithCompressionOrNull(this Document document, String name)
 		{
 			var value = document.GetBinaryValue(name);
 
