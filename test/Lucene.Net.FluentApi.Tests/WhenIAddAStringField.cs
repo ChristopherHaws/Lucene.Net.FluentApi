@@ -6,7 +6,7 @@ namespace Lucene.Net.FluentApi.Tests
 	public class WhenIAddAStringField
 	{
 		[Fact]
-		public void ThenIWantTheFieldToBeStored()
+		public void ThenIWantItToBeStored()
 		{
 			// Arrange
 			var document = new Document();

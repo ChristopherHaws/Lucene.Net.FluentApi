@@ -6,7 +6,7 @@ namespace Lucene.Net.FluentApi.Tests
 	public class WhenIAddABooleanField
 	{
 		[Fact]
-		public void ThenIWantTheFieldToBeStored()
+		public void ThenIWantItToBeStored()
 		{
 			// Arrange
 			var document = new Document();
@@ -21,7 +21,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexed()
+		public void ThenIWantItToBeIndexed()
 		{
 			// Arrange
 			var document = new Document();
@@ -36,7 +36,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexedWithBoost()
+		public void ThenIWantItToBeIndexedWithBoost()
 		{
 			// Arrange
 			var document = new Document();
@@ -53,7 +53,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexedWithPrecisionStep()
+		public void ThenIWantItToBeIndexedWithPrecisionStep()
 		{
 			// Arrange
 			var document = new Document();
@@ -68,7 +68,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexedWithPrecisionStepWithBoost()
+		public void ThenIWantItToBeIndexedWithPrecisionStepWithBoost()
 		{
 			// Arrange
 			var document = new Document();

@@ -7,7 +7,7 @@ namespace Lucene.Net.FluentApi.Tests
 	public class WhenIAddADoubleField
 	{
 		[Fact]
-		public void ThenIWantTheFieldToBeStored()
+		public void ThenIWantItToBeStored()
 		{
 			// Arrange
 			var document = new Document();
@@ -22,7 +22,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexed()
+		public void ThenIWantItToBeIndexed()
 		{
 			// Arrange
 			var document = new Document();
@@ -37,7 +37,7 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
-		public void ThenIWantTheFieldToBeIndexedWithPrecisionStep()
+		public void ThenIWantItToBeIndexedWithPrecisionStep()
 		{
 			// Arrange
 			var document = new Document();
