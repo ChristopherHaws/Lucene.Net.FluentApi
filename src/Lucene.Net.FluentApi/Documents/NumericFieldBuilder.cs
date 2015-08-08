@@ -5,7 +5,8 @@ namespace Lucene.Net.Documents
 {
 	public abstract class NumericFieldBuilder<TValue> :
 		INumericFieldBuilder<TValue>,
-		INumericFieldBuilderIndexed<TValue>
+		INumericFieldBuilderIndexed<TValue>,
+		INumericFieldBuilderIndexedWithPrecisionStep<TValue>
 	{
 		protected readonly Document Document;
 		protected readonly TValue Value;
@@ -34,7 +35,7 @@ namespace Lucene.Net.Documents
 			return this.indexBuilder.Index();
 		}
 
-		public INumericFieldBuilder<TValue> WithPrecisionStep(Int32 precisionStep)
+		public INumericFieldBuilderIndexedWithPrecisionStep<TValue> WithPrecisionStep(Int32 precisionStep)
 		{
 			this.precisionStep = precisionStep;
 			return this;

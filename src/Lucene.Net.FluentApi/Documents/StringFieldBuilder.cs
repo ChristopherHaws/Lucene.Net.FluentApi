@@ -7,6 +7,7 @@ namespace Lucene.Net.Documents
 		IStringFieldBuilderStored,
         IStringFieldBuilderWithIndex,
 		IStringFieldBuilderWithIndexAnalyzed,
+		IStringFieldBuilderWithIndexedWithoutNorms,
         IStringFieldBuilderWithTermVector
 	{
 		private readonly Document document;
@@ -54,7 +55,7 @@ namespace Lucene.Net.Documents
 			return this.indexBuilder.Analyzed();
 		}
 
-		public IStringFieldBuilder WithoutNorms()
+		public IStringFieldBuilderWithIndexedWithoutNorms WithoutNorms()
 		{
 			return this.indexBuilder.WithoutNorms();
 		}
@@ -108,7 +109,7 @@ namespace Lucene.Net.Documents
 				{
 					Boost = this.boostBuilder.ToBoost()
 				};
-
+				
 				this.document.Add(field);
 				this.document.Add(new Field(name, compressedString, Field.Store.YES));
 			}

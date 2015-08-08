@@ -36,6 +36,23 @@ namespace Lucene.Net.FluentApi.Tests
 		}
 
 		[Fact]
+		public void ThenIWantTheFieldToBeIndexedWithBoost()
+		{
+			// Arrange
+			var document = new Document();
+			var input = true;
+			var boost = 2.0f;
+
+			// Act
+			document.Add(input).Indexed().Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetFieldable("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.Equal(boost, field.Boost);
+		}
+
+		[Fact]
 		public void ThenIWantTheFieldToBeIndexedWithPrecisionStep()
 		{
 			// Arrange
@@ -48,6 +65,23 @@ namespace Lucene.Net.FluentApi.Tests
 			// Assert
 			var field = document.GetFieldable("Foo");
 			Assert.True(field.IsIndexed);
+		}
+
+		[Fact]
+		public void ThenIWantTheFieldToBeIndexedWithPrecisionStepWithBoost()
+		{
+			// Arrange
+			var document = new Document();
+			var input = true;
+			var boost = 2.0f;
+
+			// Act
+			document.Add(input).Indexed().WithPrecisionStep(8).Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetFieldable("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.Equal(boost, field.Boost);
 		}
 	}
 }

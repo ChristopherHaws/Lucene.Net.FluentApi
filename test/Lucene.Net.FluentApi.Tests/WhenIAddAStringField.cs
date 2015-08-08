@@ -67,5 +67,77 @@ namespace Lucene.Net.FluentApi.Tests
 			Assert.True(field.IsTokenized);
 			Assert.False(field.OmitNorms);
 		}
+
+		[Fact]
+		public void ThenIWantItToBeIndexedAndBoosted()
+		{
+			// Arrange
+			var document = new Document();
+			var boost = 2.0f;
+
+			// Act
+			document.Add("Bar").Indexed().Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetField("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.False(field.IsTokenized);
+			Assert.False(field.OmitNorms);
+			Assert.Equal(boost, field.Boost);
+		}
+
+		[Fact]
+		public void ThenIWantItToBeIndexedAndNotAnalyzedWithoutNormsAndBoosted()
+		{
+			// Arrange
+			var document = new Document();
+			var boost = 2.0f;
+
+			// Act
+			document.Add("Bar").Indexed().WithoutNorms().Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetField("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.False(field.IsTokenized);
+			Assert.True(field.OmitNorms);
+			Assert.Equal(boost, field.Boost);
+		}
+
+		[Fact]
+		public void ThenIWantItToBeIndexedAndAnalyzedAndBoosted()
+		{
+			// Arrange
+			var document = new Document();
+			var boost = 2.0f;
+
+			// Act
+			document.Add("Bar").Indexed().Analyzed().Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetField("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.True(field.IsTokenized);
+			Assert.False(field.OmitNorms);
+			Assert.Equal(boost, field.Boost);
+		}
+
+		[Fact]
+		public void ThenIWantItToBeIndexedAndAnalyzedWithoutNormsAndBoosted()
+		{
+			// Arrange
+			var document = new Document();
+			var boost = 2.0f;
+
+			// Act
+			document.Add("Bar").Indexed().Analyzed().WithoutNorms().Boost(boost).As("Foo");
+
+			// Assert
+			var field = document.GetField("Foo");
+			Assert.True(field.IsIndexed);
+			Assert.True(field.IsTokenized);
+			Assert.True(field.OmitNorms);
+			Assert.Equal(boost, field.Boost);
+		}
 	}
 }
