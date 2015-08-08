@@ -132,8 +132,8 @@ namespace Lucene.Net.Documents
 			var value = document.Get(name);
 
 			Single result;
-
-			if (Single.TryParse(value, out result))
+			
+			if (Lucene.Net.Support.Single.TryParse(value, out result))
 			{
 				return result;
 			}
