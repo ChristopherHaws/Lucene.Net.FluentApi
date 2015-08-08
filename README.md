@@ -10,30 +10,30 @@ Adding and Reading fields to and from a Document
 var document = new Document();
 
 // String
-document.Add("Foo").Store().Index().Analyze().OmitNorms().As("MyString");
+document.Add("Foo").Stored().Indexed().Analyzed().As("MyString");
 document.GetString("MyString");
 
 // Int32
-document.Add(Int32.MaxValue).Store().Index().As("MyInt32");
+document.Add(Int32.MaxValue).Stored().Indexed().As("MyInt32");
 document.GetInt32("MyInt32");
 
 // Int64
-document.Add(Int64.MaxValue).Store().Index().As("MyInt64");
+document.Add(Int64.MaxValue).Stored().Indexed().As("MyInt64");
 document.GetInt64("MyInt64");
 
 // Single
-document.Add(Single.MaxValue).Store().Index().As("MySingle");
+document.Add(5.0f).Stored().Indexed().As("MySingle");
 document.GetSingle("MySingle");
 
 // Double
-document.Add(Double.MaxValue).Store().Index().As("MyDouble");
+document.Add(5.0d).Stored().Indexed().As("MyDouble");
 document.GetDouble("MyDouble");
 
 // Boolean
-document.Add(true).Store().Index().As("MyBoolean");
+document.Add(true).Stored().Indexed().As("MyBoolean");
 document.GetBoolean("MyBoolean");
 
 // DateTime
-document.Add(DateTime.UtcNow).Store().Index().As("MyDateTime");
+document.Add(DateTime.UtcNow).Stored().Indexed().As("MyDateTime");
 document.GetDateTime("MyDateTime", DateTimeKind.Utc);
 ```
