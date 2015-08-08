@@ -4,7 +4,7 @@ namespace Lucene.Net.Documents
 {
 	public interface IStringFieldBuilder : IFieldBuilder
 	{
-		IStringFieldBuilder Stored();
+		IStringFieldBuilderStored Stored();
 
 		IStringFieldBuilderWithIndex Indexed();
 
@@ -13,7 +13,15 @@ namespace Lucene.Net.Documents
 		/// </summary>
 		IStringFieldBuilderWithTermVector WithTermVector();
 	}
-	
+
+	public interface IStringFieldBuilderStored : IStringFieldBuilder
+	{
+
+		IStringFieldBuilder WithCompression();
+
+		IStringFieldBuilder WithCompression(Int32 compressionLevel);
+	}
+
 	public interface IStringFieldBuilderWithIndex : IStringFieldBuilder
 	{
 		IStringFieldBuilderWithIndexAnalyzed Analyzed();

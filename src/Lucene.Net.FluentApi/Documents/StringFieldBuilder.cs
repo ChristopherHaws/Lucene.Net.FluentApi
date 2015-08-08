@@ -1,10 +1,12 @@
 using System;
+using Lucene.Net.Support;
 
 namespace Lucene.Net.Documents
 {
 	public class StringFieldBuilder :
 		IStringFieldBuilder,
-		IStringFieldBuilderWithIndex,
+		IStringFieldBuilderStored,
+        IStringFieldBuilderWithIndex,
 		IStringFieldBuilderWithIndexAnalyzed,
         IStringFieldBuilderWithTermVector
 	{
@@ -13,6 +15,7 @@ namespace Lucene.Net.Documents
 		private readonly IFieldStoreBuilder<StringFieldBuilder> storeBuilder;
 		private readonly IFieldIndexBuilder<StringFieldBuilder> indexBuilder;
 		private readonly IFieldTermVectorBuilder<StringFieldBuilder> fieldTermVectorBuilder;
+		private readonly IFieldCompressionBuilder<StringFieldBuilder> compressionBuilder;
 
 		public StringFieldBuilder(Document document, String value)
 		{
@@ -32,9 +35,10 @@ namespace Lucene.Net.Documents
 			this.storeBuilder = new FieldStoreBuilder<StringFieldBuilder>(this);
 			this.indexBuilder = new FieldIndexBuilder<StringFieldBuilder>(this);
 			this.fieldTermVectorBuilder = new FieldTermVectorBuilder<StringFieldBuilder>(this);
+			this.compressionBuilder = new FieldCompressionBuilder<StringFieldBuilder>(this);
 		}
 
-		public IStringFieldBuilder Stored()
+		public IStringFieldBuilderStored Stored()
 		{
 			return this.storeBuilder.Store();
 		}
@@ -74,13 +78,33 @@ namespace Lucene.Net.Documents
 			return this.fieldTermVectorBuilder.WithPositionsAndOffsets();
 		}
 
+		public IStringFieldBuilder WithCompression()
+		{
+			return this.compressionBuilder.WithCompression();
+		}
+
+		public IStringFieldBuilder WithCompression(Int32 compressionLevel)
+		{
+			return this.compressionBuilder.WithCompression(compressionLevel);
+		}
+
 		public void As(String name)
 		{
 			var store = this.storeBuilder.ToFieldStore();
             var index = this.indexBuilder.ToFieldIndex();
 			var termVector = this.fieldTermVectorBuilder.ToTermVector();
 			
-			this.document.Add(new Field(name, this.value, store, index, termVector));
+			if (this.compressionBuilder.IsCompressed)
+			{
+				var compressedString = this.compressionBuilder.CompressString(this.value);
+
+				this.document.Add(new Field(name, this.value, Field.Store.NO, index, termVector));
+				this.document.Add(new Field(name, compressedString, Field.Store.YES));
+			}
+			else
+			{
+				this.document.Add(new Field(name, this.value, store, index, termVector));
+			}
 		}
 	}
 }

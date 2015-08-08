@@ -7,7 +7,7 @@ namespace Lucene.Net.Documents
 	{
 		private readonly Document document;
 		private readonly Object value;
-		private readonly FieldStoreBuilder<ISerializedObjectFieldBuilder> storedBuilder;
+		private readonly IFieldCompressionBuilder<ISerializedObjectFieldBuilder> compressionBuilder;
 
 		public SerializedObjectFieldBuilder(Document document, Object value)
 		{
@@ -23,12 +23,27 @@ namespace Lucene.Net.Documents
 
 			this.document = document;
 			this.value = value;
-			this.storedBuilder = new FieldStoreBuilder<ISerializedObjectFieldBuilder>(this);
+			this.compressionBuilder = new FieldCompressionBuilder<ISerializedObjectFieldBuilder>(this);
 		}
 
-		public ISerializedObjectFieldBuilder Compressed()
+		public ISerializedObjectFieldBuilder WithCompression()
 		{
-			return this.storedBuilder.Store();
+			return this.compressionBuilder.WithCompression();
+		}
+
+		public ISerializedObjectFieldBuilder WithCompression(Int32 compressionLevel)
+		{
+			return this.compressionBuilder.WithCompression(compressionLevel);
+		}
+
+		public ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length)
+		{
+			return this.compressionBuilder.WithCompression(offset, length);
+		}
+
+		public ISerializedObjectFieldBuilder WithCompression(Int32 offset, Int32 length, Int32 compressionLevel)
+		{
+			return this.compressionBuilder.WithCompression(offset, length, compressionLevel);
 		}
 
 		public void As(String name)
@@ -38,15 +53,14 @@ namespace Lucene.Net.Documents
 				throw new ArgumentNullException(nameof(name));
 			}
 
-			var stored = this.storedBuilder.ToFieldStore();
-
 			var valueBytes = this.value.BinarySerialize();
-			this.document.Add(new Field(name, valueBytes, stored));
-		}
-	}
 
-	public interface ISerializedObjectFieldBuilder : IFieldBuilder
-	{
-		ISerializedObjectFieldBuilder Compressed();
+			if (this.compressionBuilder.IsCompressed)
+			{
+				valueBytes = this.compressionBuilder.CompressBytes(valueBytes);
+			}
+			
+			this.document.Add(new Field(name, valueBytes, Field.Store.YES));
+		}
 	}
 }
