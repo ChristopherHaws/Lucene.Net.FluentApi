@@ -2,9 +2,9 @@ using System;
 using Lucene.Net.Documents;
 using Xunit;
 
-namespace Lucene.Net.Fluent.FluentApi.Tests
+namespace Lucene.Net.Fluent.FluentApi.Tests.GetFields
 {
-	public class WhenIReadAnInt64Field
+	public class WhenIReadADateTimeField
 	{
 
 		[Fact]
@@ -16,7 +16,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			// Act
 
 			// Assert
-			Assert.Throws<InvalidOperationException>(() => document.GetInt64("Foo"));
+			Assert.Throws<InvalidOperationException>(() => document.GetDateTime("Foo", DateTimeKind.Unspecified));
 		}
 
 		[Fact]
@@ -26,7 +26,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			var value = document.GetInt64OrNull("Foo");
+			var value = document.GetDateTimeOrNull("Foo", DateTimeKind.Unspecified);
 
 			// Assert
 			Assert.Null(value);

@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using Lucene.Net.Documents;
 using Xunit;
 
-namespace Lucene.Net.FluentApi.Tests
+namespace Lucene.Net.Fluent.FluentApi.Tests.GetFields
 {
-	public class WhenIReadASerializedObject
+	public class WhenIReadAStringField
 	{
 		[Fact]
 		public void ThenIWantAnErrorWhenTheValueIsNotStored()
@@ -15,7 +15,7 @@ namespace Lucene.Net.FluentApi.Tests
 			// Act
 
 			// Assert
-			Assert.Throws<InvalidOperationException>(() => document.GetSerializedObject<SerializeableObject>("Foo"));
+			Assert.Throws<InvalidOperationException>(() => document.GetString("Foo"));
 		}
 
 		[Fact]
@@ -25,7 +25,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			var value = document.GetSerializedObjectOrNull<SerializeableObject>("Foo");
+			var value = document.GetStringOrNull("Foo");
 
 			// Assert
 			Assert.Null(value);
@@ -39,7 +39,7 @@ namespace Lucene.Net.FluentApi.Tests
 			// Act
 
 			// Assert
-			Assert.Throws<InvalidOperationException>(() => document.GetSerializedObjectWithCompression<SerializeableObject>("Foo"));
+			Assert.Throws<InvalidOperationException>(() => document.GetStringWithCompression("Foo"));
 		}
 
 		[Fact]
@@ -49,7 +49,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			var value = document.GetSerializedObjectWithCompressionOrNull<SerializeableObject>("Foo");
+			var value = document.GetStringWithCompressionOrNull("Foo");
 
 			// Assert
 			Assert.Null(value);

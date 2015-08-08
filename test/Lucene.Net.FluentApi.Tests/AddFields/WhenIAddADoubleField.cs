@@ -1,22 +1,22 @@
 using Lucene.Net.Documents;
 using Xunit;
 
-namespace Lucene.Net.Fluent.FluentApi.Tests
+namespace Lucene.Net.Fluent.FluentApi.Tests.AddFields
 {
-	public class WhenIAddASingleField
+	public class WhenIAddADoubleField
 	{
 		[Fact]
 		public void ThenIWantItToBeStored()
 		{
 			// Arrange
 			var document = new Document();
-			var input = 5f;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Stored().As("Foo");
 
 			// Assert
-			var output = document.GetSingle("Foo");
+			var output = document.GetDouble("Foo");
 			Assert.Equal(input, output);
 		}
 
@@ -25,7 +25,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = 5f;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Indexed().As("Foo");
@@ -40,7 +40,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = 5f;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Indexed().WithPrecisionStep(8).As("Foo");
@@ -55,7 +55,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = 5f;
+			var input = 5.0d;
 			var boost = 2.0f;
 
 			// Act
@@ -72,7 +72,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = 5f;
+			var input = 5.0d;
 			var boost = 2.0f;
 
 			// Act

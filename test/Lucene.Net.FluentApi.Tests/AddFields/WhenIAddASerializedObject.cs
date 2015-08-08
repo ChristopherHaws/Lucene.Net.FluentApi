@@ -2,7 +2,7 @@
 using Lucene.Net.Documents;
 using Xunit;
 
-namespace Lucene.Net.FluentApi.Tests
+namespace Lucene.Net.FluentApi.Tests.AddFields
 {
     public class WhenIAddASerializedObject
     {
