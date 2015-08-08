@@ -11,7 +11,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = Double.MaxValue;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Stored().As("Foo");
@@ -26,7 +26,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = Double.MaxValue;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Indexed().As("Foo");
@@ -41,7 +41,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = Double.MaxValue;
+			var input = 5.0d;
 
 			// Act
 			document.Add(input).Indexed().WithPrecisionStep(8).As("Foo");
@@ -56,7 +56,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = Double.MaxValue;
+			var input = 5.0d;
 			var boost = 2.0f;
 
 			// Act
@@ -73,7 +73,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 		{
 			// Arrange
 			var document = new Document();
-			var input = Double.MaxValue;
+			var input = 5.0d;
 			var boost = 2.0f;
 
 			// Act
