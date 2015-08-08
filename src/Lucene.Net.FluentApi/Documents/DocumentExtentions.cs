@@ -307,7 +307,7 @@ namespace Lucene.Net.Documents
 			return null;
 		}
 
-		public static T GetCompressedSerializedObject<T>(this Document document, String name) where T : class
+		public static T GetSerializedObjectWithCompression<T>(this Document document, String name) where T : class
 		{
 			var value = document.GetBinaryValue(name);
 
@@ -321,7 +321,7 @@ namespace Lucene.Net.Documents
 			return value.BinaryDeserialize<T>();
 		}
 
-		public static T GetCompressedSerializedObjectOrNull<T>(this Document document, String name) where T : class
+		public static T GetSerializedObjectWithCompressionOrNull<T>(this Document document, String name) where T : class
 		{
 			var value = document.GetBinaryValue(name);
 
