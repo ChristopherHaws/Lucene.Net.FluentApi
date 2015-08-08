@@ -6,7 +6,7 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 	internal interface IFieldBoostBuilder<out TFieldBuilder>
 		where TFieldBuilder : IFieldBuilder
 	{
-		TFieldBuilder Boost(Single boost);
+		TFieldBuilder BoostBy(Single amount);
 
 		Single ToBoost();
 	}

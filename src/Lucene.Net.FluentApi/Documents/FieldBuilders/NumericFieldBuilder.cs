@@ -43,9 +43,9 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 			return this;
 		}
 
-		public INumericFieldBuilder<TValue> Boost(Single boost)
+		public INumericFieldBuilder<TValue> BoostBy(Single amount)
 		{
-			return this.boostBuilder.Boost(boost);
+			return this.boostBuilder.BoostBy(amount);
 		}
 
 		public abstract void As(String name);

@@ -44,7 +44,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add(input).Indexed().Boost(boost).As("Foo");
+			document.Add(input).Indexed().BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetFieldable("Foo");
@@ -76,7 +76,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add(input).Indexed().WithPrecisionStep(8).Boost(boost).As("Foo");
+			document.Add(input).Indexed().WithPrecisionStep(8).BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetFieldable("Foo");

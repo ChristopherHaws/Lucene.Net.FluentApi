@@ -28,19 +28,19 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 
 		IStringFieldBuilderWithIndexedWithoutNorms WithoutNorms();
 
-		IStringFieldBuilderStored Boost(Single boost);
+		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
 	public interface IStringFieldBuilderWithIndexAnalyzed : IStringFieldBuilder
 	{
 		IStringFieldBuilderWithIndexedWithoutNorms WithoutNorms();
 
-		IStringFieldBuilderStored Boost(Single boost);
+		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
 	public interface IStringFieldBuilderWithIndexedWithoutNorms : IStringFieldBuilder
 	{
-		IStringFieldBuilderStored Boost(Single boost);
+		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
 	public interface IStringFieldBuilderWithTermVector : IStringFieldBuilder

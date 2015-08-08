@@ -16,11 +16,11 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 		/// </summary>
 		INumericFieldBuilderIndexedWithPrecisionStep<TValue> WithPrecisionStep(Int32 precisionStep);
 
-		INumericFieldBuilder<TValue> Boost(Single boost);
+		INumericFieldBuilder<TValue> BoostBy(Single amount);
 	}
 
 	public interface INumericFieldBuilderIndexedWithPrecisionStep<TValue> : INumericFieldBuilder<TValue>
 	{
-		INumericFieldBuilder<TValue> Boost(Single boost);
+		INumericFieldBuilder<TValue> BoostBy(Single amount);
 	}
 }

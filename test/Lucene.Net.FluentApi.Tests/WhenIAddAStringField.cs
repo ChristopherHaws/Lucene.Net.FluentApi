@@ -76,7 +76,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add("Bar").Indexed().Boost(boost).As("Foo");
+			document.Add("Bar").Indexed().BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -94,7 +94,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add("Bar").Indexed().WithoutNorms().Boost(boost).As("Foo");
+			document.Add("Bar").Indexed().WithoutNorms().BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -112,7 +112,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add("Bar").Indexed().Analyzed().Boost(boost).As("Foo");
+			document.Add("Bar").Indexed().Analyzed().BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -130,7 +130,7 @@ namespace Lucene.Net.Fluent.FluentApi.Tests
 			var boost = 2.0f;
 
 			// Act
-			document.Add("Bar").Indexed().Analyzed().WithoutNorms().Boost(boost).As("Foo");
+			document.Add("Bar").Indexed().Analyzed().WithoutNorms().BoostBy(boost).As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");

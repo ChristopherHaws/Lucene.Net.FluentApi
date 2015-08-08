@@ -14,9 +14,9 @@ namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 			this.fieldBuilder = fieldBuilder;
 		}
 
-		public TFieldBuilder Boost(Single boost)
+		public TFieldBuilder BoostBy(Single amount)
 		{
-			this.boost = boost;
+			this.boost = amount;
 			return this.fieldBuilder;
 		}
 
