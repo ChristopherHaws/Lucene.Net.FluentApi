@@ -1,5 +1,4 @@
 using System;
-using Lucene.Net.Support;
 
 namespace Lucene.Net.Documents
 {
@@ -16,6 +15,7 @@ namespace Lucene.Net.Documents
 		private readonly IFieldIndexBuilder<StringFieldBuilder> indexBuilder;
 		private readonly IFieldTermVectorBuilder<StringFieldBuilder> fieldTermVectorBuilder;
 		private readonly IFieldCompressionBuilder<StringFieldBuilder> compressionBuilder;
+		private readonly IFieldBoostBuilder<StringFieldBuilder> boostBuilder;
 
 		public StringFieldBuilder(Document document, String value)
 		{
@@ -36,6 +36,7 @@ namespace Lucene.Net.Documents
 			this.indexBuilder = new FieldIndexBuilder<StringFieldBuilder>(this);
 			this.fieldTermVectorBuilder = new FieldTermVectorBuilder<StringFieldBuilder>(this);
 			this.compressionBuilder = new FieldCompressionBuilder<StringFieldBuilder>(this);
+			this.boostBuilder = new FieldBoostBuilder<StringFieldBuilder>(this);
 		}
 
 		public IStringFieldBuilderStored Stored()
@@ -88,6 +89,11 @@ namespace Lucene.Net.Documents
 			return this.compressionBuilder.WithCompression(compressionLevel);
 		}
 
+		public IStringFieldBuilderStored Boost(Single boost)
+		{
+			return this.boostBuilder.Boost(boost);
+		}
+
 		public void As(String name)
 		{
 			var store = this.storeBuilder.ToFieldStore();
@@ -98,12 +104,22 @@ namespace Lucene.Net.Documents
 			{
 				var compressedString = this.compressionBuilder.CompressString(this.value);
 
-				this.document.Add(new Field(name, this.value, Field.Store.NO, index, termVector));
+				var field = new Field(name, this.value, Field.Store.NO, index, termVector)
+				{
+					Boost = this.boostBuilder.ToBoost()
+				};
+
+				this.document.Add(field);
 				this.document.Add(new Field(name, compressedString, Field.Store.YES));
 			}
 			else
 			{
-				this.document.Add(new Field(name, this.value, store, index, termVector));
+				var field = new Field(name, this.value, store, index, termVector)
+				{
+					Boost = this.boostBuilder.ToBoost()
+				};
+
+				this.document.Add(field);
 			}
 		}
 	}
