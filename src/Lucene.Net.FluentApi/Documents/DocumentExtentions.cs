@@ -6,7 +6,6 @@ namespace Lucene.Net.Documents
 {
 	public static class DocumentExtentions
 	{
-
 		public static StringFieldBuilder Add(this Document document, String value)
 		{
 			return new StringFieldBuilder(document, value);
@@ -58,6 +57,7 @@ namespace Lucene.Net.Documents
 
 			return result;
 		}
+
 		public static String GetStringOrNull(this Document document, String name)
 		{
 			return document.Get(name);
