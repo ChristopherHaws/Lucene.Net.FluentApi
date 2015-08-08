@@ -4,13 +4,13 @@ using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal class FieldStoreBuilder<TFieldBuilder> : IFieldStoreBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class StoredFieldPropertyBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 
 		private Field.Store store;
 
-		public FieldStoreBuilder(TFieldBuilder fieldBuilder)
+		public StoredFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
 			this.fieldBuilder = fieldBuilder;
 			this.store = Field.Store.NO;

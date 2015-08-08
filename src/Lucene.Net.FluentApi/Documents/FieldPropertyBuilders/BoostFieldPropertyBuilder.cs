@@ -3,13 +3,13 @@ using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal class FieldBoostBuilder<TFieldBuilder> :
-		IFieldBoostBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class BoostFieldPropertyBuilder<TFieldBuilder>
+		 where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 		private Single? boost;
 
-		public FieldBoostBuilder(TFieldBuilder fieldBuilder)
+		public BoostFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
 			this.fieldBuilder = fieldBuilder;
 		}

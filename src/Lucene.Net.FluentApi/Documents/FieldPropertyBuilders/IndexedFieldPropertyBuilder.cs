@@ -5,13 +5,14 @@ using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal class FieldIndexBuilder<TFieldBuilder> : IFieldIndexBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class IndexedFieldPropertyBuilder<TFieldBuilder>
+		where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 
 		private Field.Index index;
 
-		public FieldIndexBuilder(TFieldBuilder fieldBuilder)
+		public IndexedFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
 			this.fieldBuilder = fieldBuilder;
 			this.index = Field.Index.NO;

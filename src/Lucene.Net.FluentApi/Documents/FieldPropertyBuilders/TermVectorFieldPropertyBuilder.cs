@@ -4,12 +4,13 @@ using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal class FieldTermVectorBuilder<TFieldBuilder> : IFieldTermVectorBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class TermVectorFieldPropertyBuilder<TFieldBuilder>
+		where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 		private Field.TermVector termVectorType;
 		
-		public FieldTermVectorBuilder(TFieldBuilder fieldBuilder)
+		public TermVectorFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
 			this.fieldBuilder = fieldBuilder;
 			this.termVectorType = Field.TermVector.NO;

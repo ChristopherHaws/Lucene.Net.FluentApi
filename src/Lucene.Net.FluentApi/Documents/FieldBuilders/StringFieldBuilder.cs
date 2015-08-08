@@ -1,7 +1,6 @@
 using System;
 using Lucene.Net.Documents;
 using Lucene.Net.Fluent.Documents.FieldPropertyBuilders;
-using Lucene.Net.Fluent.Documents.FieldPropertyBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {
@@ -15,11 +14,11 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 	{
 		private readonly Document document;
 		private readonly String value;
-		private readonly IFieldStoreBuilder<StringFieldBuilder> storeBuilder;
-		private readonly IFieldIndexBuilder<StringFieldBuilder> indexBuilder;
-		private readonly IFieldTermVectorBuilder<StringFieldBuilder> fieldTermVectorBuilder;
-		private readonly IFieldCompressionBuilder<StringFieldBuilder> compressionBuilder;
-		private readonly IFieldBoostBuilder<StringFieldBuilder> boostBuilder;
+		private readonly StoredFieldPropertyBuilder<StringFieldBuilder> storeBuilder;
+		private readonly IndexedFieldPropertyBuilder<StringFieldBuilder> indexBuilder;
+		private readonly TermVectorFieldPropertyBuilder<StringFieldBuilder> termVectorFieldPropertyBuilder;
+		private readonly CompressionFieldPropertyBuilder<StringFieldBuilder> compressionBuilder;
+		private readonly BoostFieldPropertyBuilder<StringFieldBuilder> boostBuilder;
 
 		public StringFieldBuilder(Document document, String value)
 		{
@@ -36,11 +35,11 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 			this.document = document;
 			this.value = value;
 
-			this.storeBuilder = new FieldStoreBuilder<StringFieldBuilder>(this);
-			this.indexBuilder = new FieldIndexBuilder<StringFieldBuilder>(this);
-			this.fieldTermVectorBuilder = new FieldTermVectorBuilder<StringFieldBuilder>(this);
-			this.compressionBuilder = new FieldCompressionBuilder<StringFieldBuilder>(this);
-			this.boostBuilder = new FieldBoostBuilder<StringFieldBuilder>(this);
+			this.storeBuilder = new StoredFieldPropertyBuilder<StringFieldBuilder>(this);
+			this.indexBuilder = new IndexedFieldPropertyBuilder<StringFieldBuilder>(this);
+			this.termVectorFieldPropertyBuilder = new TermVectorFieldPropertyBuilder<StringFieldBuilder>(this);
+			this.compressionBuilder = new CompressionFieldPropertyBuilder<StringFieldBuilder>(this);
+			this.boostBuilder = new BoostFieldPropertyBuilder<StringFieldBuilder>(this);
 		}
 
 		public IStringFieldBuilderStored Stored()
@@ -65,22 +64,22 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 		
 		public IStringFieldBuilderWithTermVector WithTermVector()
 		{
-			return this.fieldTermVectorBuilder.WithTermVector();
+			return this.termVectorFieldPropertyBuilder.WithTermVector();
 		}
 
 		public IStringFieldBuilder WithPositions()
 		{
-			return this.fieldTermVectorBuilder.WithPositions();
+			return this.termVectorFieldPropertyBuilder.WithPositions();
 		}
 
 		public IStringFieldBuilder WithOffsets()
 		{
-			return this.fieldTermVectorBuilder.WithOffsets();
+			return this.termVectorFieldPropertyBuilder.WithOffsets();
 		}
 
 		public IStringFieldBuilder WithPositionsAndOffsets()
 		{
-			return this.fieldTermVectorBuilder.WithPositionsAndOffsets();
+			return this.termVectorFieldPropertyBuilder.WithPositionsAndOffsets();
 		}
 
 		public IStringFieldBuilder WithCompression()
@@ -102,7 +101,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 		{
 			var store = this.storeBuilder.ToFieldStore();
             var index = this.indexBuilder.ToFieldIndex();
-			var termVector = this.fieldTermVectorBuilder.ToTermVector();
+			var termVector = this.termVectorFieldPropertyBuilder.ToTermVector();
 			
 			if (this.compressionBuilder.IsCompressed)
 			{

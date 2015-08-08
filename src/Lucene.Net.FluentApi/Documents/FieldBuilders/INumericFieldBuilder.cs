@@ -1,26 +1,24 @@
-using System;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {
-	public interface INumericFieldBuilder<TValue> : IFieldBuilder
+	public interface INumericFieldBuilder<TValue> :
+		IFieldBuilder,
+		ICanBeStored<INumericFieldBuilder<TValue>>,
+		ICanBeIndexed<INumericFieldBuilderIndexed<TValue>>
 	{
-		INumericFieldBuilder<TValue> Stored();
-
-		INumericFieldBuilderIndexed<TValue> Indexed();
 	}
 
-	public interface INumericFieldBuilderIndexed<TValue> : INumericFieldBuilder<TValue>
-	{
-		/// <summary>
-		/// You can choose any precisionStep when encoding values. Lower step values mean more precisions and so more terms in index (and index gets larger). On the other hand, the maximum number of terms to match reduces, which optimized query speed.
-		/// </summary>
-		INumericFieldBuilderIndexedWithPrecisionStep<TValue> WithPrecisionStep(Int32 precisionStep);
-
-		INumericFieldBuilder<TValue> BoostBy(Single amount);
+	public interface INumericFieldBuilderIndexed<TValue> :
+		INumericFieldBuilder<TValue>,
+		ICanContainPrecisionStep<INumericFieldBuilderIndexedWithPrecisionStep<TValue>>,
+        ICanBeBoosted<INumericFieldBuilder<TValue>>
+    {
 	}
 
-	public interface INumericFieldBuilderIndexedWithPrecisionStep<TValue> : INumericFieldBuilder<TValue>
+	public interface INumericFieldBuilderIndexedWithPrecisionStep<TValue> :
+		INumericFieldBuilder<TValue>,
+		ICanBeBoosted<INumericFieldBuilder<TValue>>
 	{
-		INumericFieldBuilder<TValue> BoostBy(Single amount);
 	}
 }

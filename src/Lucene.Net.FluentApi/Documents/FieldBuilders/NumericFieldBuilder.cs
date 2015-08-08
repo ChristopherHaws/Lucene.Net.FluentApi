@@ -13,18 +13,18 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 		protected readonly Document Document;
 		protected readonly TValue Value;
 		private Int32 precisionStep;
-		private readonly IFieldStoreBuilder<NumericFieldBuilder<TValue>> storeBuilder;
-		private readonly IFieldIndexBuilder<NumericFieldBuilder<TValue>> indexBuilder;
-		private readonly IFieldBoostBuilder<NumericFieldBuilder<TValue>> boostBuilder;
+		private readonly StoredFieldPropertyBuilder<NumericFieldBuilder<TValue>> storeBuilder;
+		private readonly IndexedFieldPropertyBuilder<NumericFieldBuilder<TValue>> indexBuilder;
+		private readonly BoostFieldPropertyBuilder<NumericFieldBuilder<TValue>> boostBuilder;
 
 		protected NumericFieldBuilder(Document document, TValue value)
 		{
 			this.Document = document;
 			this.Value = value;
 			this.precisionStep = NumericUtils.PRECISION_STEP_DEFAULT;
-            this.storeBuilder = new FieldStoreBuilder<NumericFieldBuilder<TValue>>(this);
-			this.indexBuilder = new FieldIndexBuilder<NumericFieldBuilder<TValue>>(this);
-			this.boostBuilder = new FieldBoostBuilder<NumericFieldBuilder<TValue>>(this);
+            this.storeBuilder = new StoredFieldPropertyBuilder<NumericFieldBuilder<TValue>>(this);
+			this.indexBuilder = new IndexedFieldPropertyBuilder<NumericFieldBuilder<TValue>>(this);
+			this.boostBuilder = new BoostFieldPropertyBuilder<NumericFieldBuilder<TValue>>(this);
 		}
 
 		public INumericFieldBuilder<TValue> Stored()

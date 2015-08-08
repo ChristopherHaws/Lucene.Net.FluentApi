@@ -9,7 +9,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 	{
 		private readonly Document document;
 		private readonly Object value;
-		private readonly IFieldCompressionBuilder<ISerializedObjectFieldBuilder> compressionBuilder;
+		private readonly CompressionFieldPropertyBuilder<ISerializedObjectFieldBuilder> compressionBuilder;
 
 		public SerializedObjectFieldBuilder(Document document, Object value)
 		{
@@ -25,7 +25,7 @@ namespace Lucene.Net.Fluent.Documents.FieldBuilders
 
 			this.document = document;
 			this.value = value;
-			this.compressionBuilder = new FieldCompressionBuilder<ISerializedObjectFieldBuilder>(this);
+			this.compressionBuilder = new CompressionFieldPropertyBuilder<ISerializedObjectFieldBuilder>(this);
 		}
 
 		public ISerializedObjectFieldBuilder WithCompression()

@@ -1,63 +1,44 @@
-using System;
+using Lucene.Net.Fluent.Documents.FieldProperties;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {
-	public interface IStringFieldBuilder : IFieldBuilder
+	public interface IStringFieldBuilder :
+		IFieldBuilder,
+		ICanBeStored<IStringFieldBuilderStored>,
+		ICanBeIndexed<IStringFieldBuilderWithIndex>,
+		ICanContainTermVector<IStringFieldBuilderWithTermVector>
 	{
-		IStringFieldBuilderStored Stored();
-
-		IStringFieldBuilderWithIndex Indexed();
-
-		/// <summary>
-		/// Stores the term vectors of the document. A term vector is a list of the document's terms and their number of occurrences in that document
-		/// </summary>
-		IStringFieldBuilderWithTermVector WithTermVector();
 	}
 
-	public interface IStringFieldBuilderStored : IStringFieldBuilder
+	public interface IStringFieldBuilderStored :
+		IStringFieldBuilder,
+		ICanBeCompressed<IStringFieldBuilder>
 	{
-
-		IStringFieldBuilder WithCompression();
-
-		IStringFieldBuilder WithCompression(Int32 compressionLevel);
 	}
 
-	public interface IStringFieldBuilderWithIndex : IStringFieldBuilder
+	public interface IStringFieldBuilderWithIndex :
+		IStringFieldBuilder,
+		ICanBeBoosted<IStringFieldBuilderStored>,
+		ICanBeAnalyzed<IStringFieldBuilderWithIndexAnalyzed>,
+		ICanOmitNorms<IStringFieldBuilderWithIndexedWithoutNorms>
 	{
-		IStringFieldBuilderWithIndexAnalyzed Analyzed();
-
-		IStringFieldBuilderWithIndexedWithoutNorms WithoutNorms();
-
-		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
-	public interface IStringFieldBuilderWithIndexAnalyzed : IStringFieldBuilder
+	public interface IStringFieldBuilderWithIndexAnalyzed :
+		IStringFieldBuilder,
+		ICanBeBoosted<IStringFieldBuilderStored>,
+		ICanOmitNorms<IStringFieldBuilderWithIndexedWithoutNorms>
 	{
-		IStringFieldBuilderWithIndexedWithoutNorms WithoutNorms();
-
-		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
-	public interface IStringFieldBuilderWithIndexedWithoutNorms : IStringFieldBuilder
+	public interface IStringFieldBuilderWithIndexedWithoutNorms :
+		IStringFieldBuilder,
+		ICanBeBoosted<IStringFieldBuilderStored>
 	{
-		IStringFieldBuilderStored BoostBy(Single amount);
 	}
 
-	public interface IStringFieldBuilderWithTermVector : IStringFieldBuilder
+	public interface IStringFieldBuilderWithTermVector :
+		ICanContainTermVectorPositionsAndOffsets<IStringFieldBuilder>
 	{
-		/// <summary>
-		/// Store the token position information for the term vector.
-		/// </summary>
-		IStringFieldBuilder WithPositions();
-
-		/// <summary>
-		/// Store the token offset information for the term vector.
-		/// </summary>
-		IStringFieldBuilder WithOffsets();
-
-		/// <summary>
-		/// Store token position and offset information for the term vector.
-		/// </summary>
-		IStringFieldBuilder WithPositionsAndOffsets();
 	}
 }

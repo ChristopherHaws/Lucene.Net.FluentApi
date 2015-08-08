@@ -4,14 +4,14 @@ using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal class FieldCompressionBuilder<TFieldBuilder> : IFieldCompressionBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class CompressionFieldPropertyBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 		private Int32? offset;
 		private Int32? length;
 		private Int32? compressionLevel;
 
-		public FieldCompressionBuilder(TFieldBuilder fieldBuilder)
+		public CompressionFieldPropertyBuilder(TFieldBuilder fieldBuilder)
 		{
 			this.fieldBuilder = fieldBuilder;
 		}
