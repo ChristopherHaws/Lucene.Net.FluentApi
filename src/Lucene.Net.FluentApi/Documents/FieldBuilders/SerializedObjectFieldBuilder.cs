@@ -1,7 +1,8 @@
 using System;
+using Lucene.Net.Documents.FieldPropertyBuilders;
 using Lucene.Net.Extentions;
 
-namespace Lucene.Net.Documents
+namespace Lucene.Net.Documents.FieldBuilders
 {
 	public class SerializedObjectFieldBuilder : ISerializedObjectFieldBuilder
 	{

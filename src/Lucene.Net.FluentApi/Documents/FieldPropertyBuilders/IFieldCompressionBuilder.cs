@@ -1,6 +1,7 @@
 using System;
+using Lucene.Net.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents
+namespace Lucene.Net.Documents.FieldPropertyBuilders
 {
 	public interface IFieldCompressionBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{

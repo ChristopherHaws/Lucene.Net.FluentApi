@@ -1,6 +1,7 @@
 using System;
+using Lucene.Net.Documents.FieldPropertyBuilders;
 
-namespace Lucene.Net.Documents
+namespace Lucene.Net.Documents.FieldBuilders
 {
 	public class StringFieldBuilder :
 		IStringFieldBuilder,

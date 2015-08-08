@@ -1,7 +1,8 @@
 using System;
+using Lucene.Net.Documents.FieldPropertyBuilders;
 using Lucene.Net.Util;
 
-namespace Lucene.Net.Documents
+namespace Lucene.Net.Documents.FieldBuilders
 {
 	public abstract class NumericFieldBuilder<TValue> :
 		INumericFieldBuilder<TValue>,

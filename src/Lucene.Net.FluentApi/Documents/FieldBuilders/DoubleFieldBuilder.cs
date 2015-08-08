@@ -1,6 +1,6 @@
 using System;
 
-namespace Lucene.Net.Documents
+namespace Lucene.Net.Documents.FieldBuilders
 {
 	public class DoubleFieldBuilder : NumericFieldBuilder<Double>
 	{
