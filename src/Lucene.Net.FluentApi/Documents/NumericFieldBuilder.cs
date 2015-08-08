@@ -1,29 +1,40 @@
 using System;
+using Lucene.Net.Util;
 
 namespace Lucene.Net.Documents
 {
-	public abstract class NumericFieldBuilder<T>
+	public abstract class NumericFieldBuilder<TValue> :
+		INumericFieldBuilder<TValue>,
+		INumericFieldBuilderIndexed<TValue>
 	{
 		protected readonly Document Document;
-		protected readonly T Value;
-		private Boolean store;
-		private Boolean index;
+		protected readonly TValue Value;
+		private Int32 precisionStep;
+		private readonly IFieldStoreBuilder<NumericFieldBuilder<TValue>> storeBuilder;
+		private readonly IFieldIndexBuilder<NumericFieldBuilder<TValue>> indexBuilder;
 
-		protected NumericFieldBuilder(Document document, T value)
+		protected NumericFieldBuilder(Document document, TValue value)
 		{
 			this.Document = document;
 			this.Value = value;
+			this.precisionStep = NumericUtils.PRECISION_STEP_DEFAULT;
+            this.storeBuilder = new FieldStoreBuilder<NumericFieldBuilder<TValue>>(this);
+			this.indexBuilder = new FieldIndexBuilder<NumericFieldBuilder<TValue>>(this);
 		}
 
-		public NumericFieldBuilder<T> Store()
+		public INumericFieldBuilder<TValue> Stored()
 		{
-			this.store = true;
-			return this;
+			return this.storeBuilder.Store();
 		}
 
-		public NumericFieldBuilder<T> Index()
+		public INumericFieldBuilderIndexed<TValue> Indexed()
 		{
-			this.index = true;
+			return this.indexBuilder.Index();
+		}
+
+		public INumericFieldBuilder<TValue> WithPrecisionStep(Int32 precisionStep)
+		{
+			this.precisionStep = precisionStep;
 			return this;
 		}
 
@@ -31,7 +42,10 @@ namespace Lucene.Net.Documents
 
 		protected NumericField BuildField(String name)
 		{
-			return new NumericField(name, this.store ? Field.Store.YES : Field.Store.NO, this.index);
-		} 
+			var stored = this.storeBuilder.ToFieldStore();
+			var indexed = this.indexBuilder.ToFieldIndex() != Field.Index.NO;
+
+			return new NumericField(name, this.precisionStep, stored, indexed);
+        }
 	}
 }

@@ -1,14 +1,18 @@
 using System;
-using System.Linq;
 
 namespace Lucene.Net.Documents
 {
-	public class StringFieldBuilder
+	public class StringFieldBuilder :
+		IStringFieldBuilder,
+		IStringFieldBuilderWithIndex,
+		IStringFieldBuilderWithIndexAnalyzed,
+        IStringFieldBuilderWithTermVector
 	{
 		private readonly Document document;
 		private readonly String value;
-		private Field.Store store;
-		private Field.Index index;
+		private readonly IFieldStoreBuilder<StringFieldBuilder> storeBuilder;
+		private readonly IFieldIndexBuilder<StringFieldBuilder> indexBuilder;
+		private readonly IFieldTermVectorBuilder<StringFieldBuilder> fieldTermVectorBuilder;
 
 		public StringFieldBuilder(Document document, String value)
 		{
@@ -19,73 +23,64 @@ namespace Lucene.Net.Documents
 
 			if (String.IsNullOrWhiteSpace(value))
 			{
-				throw new ArgumentException("Value must not be null or whitespace", nameof(value));
+				throw new ArgumentException("Field must not be null or whitespace.", nameof(value));
 			}
 
 			this.document = document;
 			this.value = value;
-			this.store = Field.Store.NO;
-			this.index = Field.Index.NO;
+
+			this.storeBuilder = new FieldStoreBuilder<StringFieldBuilder>(this);
+			this.indexBuilder = new FieldIndexBuilder<StringFieldBuilder>(this);
+			this.fieldTermVectorBuilder = new FieldTermVectorBuilder<StringFieldBuilder>(this);
 		}
 
-		public StringFieldBuilder Store()
+		public IStringFieldBuilder Stored()
 		{
-			if (this.store == Field.Store.YES)
-			{
-				throw new InvalidOperationException("Value is already set to be stored.");
-			}
-
-			this.store = Field.Store.YES;
-
-			return this;
+			return this.storeBuilder.Store();
 		}
 		
-		public StringFieldBuilder Index()
+		public IStringFieldBuilderWithIndex Indexed()
 		{
-			if (this.index != Field.Index.NO)
-			{
-				throw new InvalidOperationException("Value is already set to be indexed.");
-			}
-
-			this.index = Field.Index.NOT_ANALYZED;
-
-			return this;
+			return this.indexBuilder.Index();
 		}
 
-		public StringFieldBuilder Analyze()
+		public IStringFieldBuilderWithIndexAnalyzed Analyzed()
 		{
-			if (this.index == Field.Index.NO)
-			{
-				throw new InvalidOperationException("Value must be indexed to be analyzed.");
-			}
-
-			if (new[] { Field.Index.ANALYZED, Field.Index.ANALYZED_NO_NORMS }.Contains(this.index))
-			{
-				throw new InvalidOperationException("Value is already set to be analyzed.");
-			}
-
-			this.index = Field.Index.ANALYZED;
-
-			return this;
+			return this.indexBuilder.Analyzed();
 		}
 
-		public StringFieldBuilder OmitNorms()
+		public IStringFieldBuilder WithoutNorms()
 		{
-			if (!new[] { Field.Index.ANALYZED, Field.Index.NOT_ANALYZED }.Contains(this.index))
-			{
-				throw new InvalidOperationException("Value must be indexed to omit norms.");
-			}
+			return this.indexBuilder.WithoutNorms();
+		}
+		
+		public IStringFieldBuilderWithTermVector WithTermVector()
+		{
+			return this.fieldTermVectorBuilder.WithTermVector();
+		}
 
-			this.index = this.index == Field.Index.ANALYZED
-				? Field.Index.ANALYZED_NO_NORMS
-				: Field.Index.NOT_ANALYZED_NO_NORMS;
+		public IStringFieldBuilder WithPositions()
+		{
+			return this.fieldTermVectorBuilder.WithPositions();
+		}
 
-			return this;
+		public IStringFieldBuilder WithOffsets()
+		{
+			return this.fieldTermVectorBuilder.WithOffsets();
+		}
+
+		public IStringFieldBuilder WithPositionsAndOffsets()
+		{
+			return this.fieldTermVectorBuilder.WithPositionsAndOffsets();
 		}
 
 		public void As(String name)
 		{
-			this.document.Add(new Field(name, this.value, this.store, this.index));
+			var store = this.storeBuilder.ToFieldStore();
+            var index = this.indexBuilder.ToFieldIndex();
+			var termVector = this.fieldTermVectorBuilder.ToTermVector();
+			
+			this.document.Add(new Field(name, this.value, store, index, termVector));
 		}
 	}
 }

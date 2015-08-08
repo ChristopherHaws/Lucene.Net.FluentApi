@@ -7,6 +7,7 @@ namespace Lucene.Net.Documents
 		public Int64FieldBuilder(Document document, Int64 value) :
 			base(document, value)
 		{
+			this.WithPrecisionStep(8);
 		}
 
 		public override void As(String name)

@@ -13,7 +13,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var input = true;
 
 			// Act
-			document.Add(input).Store().As("Foo");
+			document.Add(input).Stored().As("Foo");
 
 			// Assert
 			var output = document.GetBoolean("Foo");
@@ -28,7 +28,22 @@ namespace Lucene.Net.FluentApi.Tests
 			var input = true;
 
 			// Act
-			document.Add(input).Index().As("Foo");
+			document.Add(input).Indexed().As("Foo");
+
+			// Assert
+			var field = document.GetFieldable("Foo");
+			Assert.True(field.IsIndexed);
+		}
+
+		[Fact]
+		public void ThenIWantTheFieldToBeIndexedWithPrecisionStep()
+		{
+			// Arrange
+			var document = new Document();
+			var input = true;
+
+			// Act
+			document.Add(input).Indexed().WithPrecisionStep(8).As("Foo");
 
 			// Assert
 			var field = document.GetFieldable("Foo");

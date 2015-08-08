@@ -13,7 +13,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var input = "Bar";
 
 			// Act
-			document.Add(input).Store().As("Foo");
+			document.Add(input).Stored().As("Foo");
 
 			// Assert
 			var output = document.GetString("Foo");
@@ -27,7 +27,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.Add("Bar").Index().OmitNorms().As("Foo");
+			document.Add("Bar").Indexed().WithoutNorms().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -43,7 +43,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.Add("Bar").Index().Analyze().OmitNorms().As("Foo");
+			document.Add("Bar").Indexed().Analyzed().WithoutNorms().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -59,7 +59,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.Add("Bar").Index().Analyze().As("Foo");
+			document.Add("Bar").Indexed().Analyzed().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");

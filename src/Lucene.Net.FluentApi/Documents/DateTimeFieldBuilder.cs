@@ -7,6 +7,7 @@ namespace Lucene.Net.Documents
 		public DateTimeFieldBuilder(Document document, DateTime value) :
 			base(document, value)
 		{
+			this.WithPrecisionStep(8);
 		}
 
 		public override void As(String name)
