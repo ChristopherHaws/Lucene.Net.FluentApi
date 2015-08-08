@@ -1,7 +1,10 @@
 using System;
+using System.CodeDom;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Lucene.Net.Fluent.Documents.FieldBuilders;
+using Lucene.Net.Fluent.Extentions;
 
 namespace Lucene.Net.Documents
 {
@@ -62,6 +65,30 @@ namespace Lucene.Net.Documents
 		public static String GetStringOrNull(this Document document, String name)
 		{
 			return document.Get(name);
+		}
+
+		public static String GetCompressedString(this Document document, String name)
+		{
+			var result = document.GetCompressedStringOrNull(name);
+
+			if (result == null)
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return result;
+		}
+
+		public static String GetCompressedStringOrNull(this Document document, String name)
+		{
+			var value = document.GetBinaryValue(name);
+
+			if (value == null)
+			{
+				return null;
+			}
+
+			return CompressionTools.DecompressString(value);
 		}
 
 		public static Int32 GetInt32(this Document document, String name)
@@ -243,6 +270,77 @@ namespace Lucene.Net.Documents
 			}
 
 			return result;
+		}
+
+
+
+		public static T GetSerializedObject<T>(this Document document, String name) where T : class
+		{
+			var value = document.GetBinaryValue(name);
+
+			if (value == null || !value.Any())
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			return value.BinaryDeserialize<T>();
+		}
+
+		public static T GetSerializedObjectOrNull<T>(this Document document, String name) where T : class
+		{
+			var value = document.GetBinaryValue(name);
+
+			if (value == null || !value.Any())
+			{
+				return null;
+			}
+
+			try
+			{
+				return value.BinaryDeserialize<T>();
+			}
+			catch (Exception ex)
+			{
+				Trace.WriteLine("Failed to deserialize object. " + ex);
+			}
+
+			return null;
+		}
+
+		public static T GetCompressedSerializedObject<T>(this Document document, String name) where T : class
+		{
+			var value = document.GetBinaryValue(name);
+
+			if (value == null || !value.Any())
+			{
+				throw new InvalidOperationException("Document does not contain a field named " + name);
+			}
+
+			value = CompressionTools.Decompress(value);
+
+			return value.BinaryDeserialize<T>();
+		}
+
+		public static T GetCompressedSerializedObjectOrNull<T>(this Document document, String name) where T : class
+		{
+			var value = document.GetBinaryValue(name);
+
+			if (value == null || !value.Any())
+			{
+				return null;
+			}
+
+			try
+			{
+				value = CompressionTools.Decompress(value);
+				return value.BinaryDeserialize<T>();
+			}
+			catch (Exception ex)
+			{
+				Trace.WriteLine("Failed to decompress and deserialize object. " + ex);
+			}
+
+			return null;
 		}
 	}
 }
