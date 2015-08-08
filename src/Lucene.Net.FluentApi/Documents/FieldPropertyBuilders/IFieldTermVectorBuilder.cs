@@ -1,8 +1,9 @@
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public interface IFieldTermVectorBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal interface IFieldTermVectorBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		/// <summary>
 		/// Stores the term vectors of the document. A term vector is a list of the document's terms and their number of occurrences in that document

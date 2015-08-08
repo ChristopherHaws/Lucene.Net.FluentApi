@@ -1,9 +1,10 @@
 using System;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public class FieldCompressionBuilder<TFieldBuilder> : IFieldCompressionBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class FieldCompressionBuilder<TFieldBuilder> : IFieldCompressionBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 		private Int32? offset;

@@ -1,8 +1,9 @@
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public interface IFieldIndexBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal interface IFieldIndexBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		/// <summary>
 		/// 

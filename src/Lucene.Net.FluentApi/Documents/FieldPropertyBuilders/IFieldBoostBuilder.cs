@@ -1,9 +1,9 @@
 using System;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public interface IFieldBoostBuilder<out TFieldBuilder>
+	internal interface IFieldBoostBuilder<out TFieldBuilder>
 		where TFieldBuilder : IFieldBuilder
 	{
 		TFieldBuilder Boost(Single boost);

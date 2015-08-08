@@ -1,7 +1,7 @@
 using Lucene.Net.Documents;
 using Xunit;
 
-namespace Lucene.Net.FluentApi.Tests
+namespace Lucene.Net.Fluent.FluentApi.Tests
 {
 	public class WhenIAddAStringField
 	{

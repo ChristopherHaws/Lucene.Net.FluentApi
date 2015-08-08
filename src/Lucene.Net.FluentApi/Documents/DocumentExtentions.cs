@@ -1,7 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
 namespace Lucene.Net.Documents
 {

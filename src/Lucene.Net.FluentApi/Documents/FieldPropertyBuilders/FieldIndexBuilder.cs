@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	internal sealed class FieldIndexBuilder<TFieldBuilder> : IFieldIndexBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class FieldIndexBuilder<TFieldBuilder> : IFieldIndexBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 

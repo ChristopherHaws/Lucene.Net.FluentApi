@@ -1,6 +1,6 @@
 using System;
 
-namespace Lucene.Net.Documents.FieldBuilders
+namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {
 	public interface INumericFieldBuilder<TValue> : IFieldBuilder
 	{

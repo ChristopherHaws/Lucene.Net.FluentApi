@@ -1,9 +1,10 @@
 using System;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Documents;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public class FieldTermVectorBuilder<TFieldBuilder> : IFieldTermVectorBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal class FieldTermVectorBuilder<TFieldBuilder> : IFieldTermVectorBuilder<TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		private readonly TFieldBuilder fieldBuilder;
 		private Field.TermVector termVectorType;

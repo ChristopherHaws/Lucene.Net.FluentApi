@@ -1,9 +1,9 @@
 using System;
-using Lucene.Net.Documents.FieldBuilders;
+using Lucene.Net.Fluent.Documents.FieldBuilders;
 
-namespace Lucene.Net.Documents.FieldPropertyBuilders
+namespace Lucene.Net.Fluent.Documents.FieldPropertyBuilders
 {
-	public interface IFieldCompressionBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
+	internal interface IFieldCompressionBuilder<out TFieldBuilder> where TFieldBuilder : IFieldBuilder
 	{
 		Boolean IsCompressed { get; }
 
