@@ -1,11 +1,25 @@
-﻿using System;
 using Lucene.Net.Documents;
 using Xunit;
 
 namespace Lucene.Net.FluentApi.Tests
 {
-    public class WhenIAddAnIndexedField
-    {
+	public class WhenIAddAStringField
+	{
+		[Fact]
+		public void ThenIWantTheFieldToBeStored()
+		{
+			// Arrange
+			var document = new Document();
+			var input = "Bar";
+
+			// Act
+			document.Add(input).Store().As("Foo");
+
+			// Assert
+			var output = document.GetString("Foo");
+			Assert.Equal(input, output);
+		}
+
 		[Fact]
 		public void ThenIWantANonAnalyzedNoNormsFieldAdded()
 		{
@@ -13,7 +27,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.AddField("Foo").Indexed().Value("Bar");
+			document.Add("Bar").Index().OmitNorms().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -29,7 +43,7 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.AddField("Foo").Indexed(true).Value("Bar");
+			document.Add("Bar").Index().Analyze().OmitNorms().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
@@ -45,11 +59,11 @@ namespace Lucene.Net.FluentApi.Tests
 			var document = new Document();
 
 			// Act
-			document.AddField("Foo").Indexed(true, true).Value("Bar");
+			document.Add("Bar").Index().Analyze().As("Foo");
 
 			// Assert
 			var field = document.GetField("Foo");
-            Assert.True(field.IsIndexed);
+			Assert.True(field.IsIndexed);
 			Assert.True(field.IsTokenized);
 			Assert.False(field.OmitNorms);
 		}

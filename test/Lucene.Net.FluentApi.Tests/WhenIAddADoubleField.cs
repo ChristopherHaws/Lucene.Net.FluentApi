@@ -4,20 +4,20 @@ using Xunit;
 
 namespace Lucene.Net.FluentApi.Tests
 {
-	public class WhenIAddAnDateTimeField
+	public class WhenIAddADoubleField
 	{
 		[Fact]
 		public void ThenIWantTheFieldToBeStored()
 		{
 			// Arrange
 			var document = new Document();
-			var input = DateTime.UtcNow;
+			var input = Double.MaxValue;
 
 			// Act
 			document.Add(input).Store().As("Foo");
 
 			// Assert
-			var output = document.GetDateTime("Foo", DateTimeKind.Utc);
+			var output = document.GetDouble("Foo");
 			Assert.Equal(input, output);
 		}
 	}

@@ -3,20 +3,20 @@ using Xunit;
 
 namespace Lucene.Net.FluentApi.Tests
 {
-	public class WhenIAddAnSingleField
+	public class WhenIAddABooleanField
 	{
 		[Fact]
 		public void ThenIWantTheFieldToBeStored()
 		{
 			// Arrange
 			var document = new Document();
-			var input = 50156.60f;
+			var input = true;
 
 			// Act
 			document.Add(input).Store().As("Foo");
 
 			// Assert
-			var output = document.GetSingle("Foo");
+			var output = document.GetBoolean("Foo");
 			Assert.Equal(input, output);
 		}
 	}

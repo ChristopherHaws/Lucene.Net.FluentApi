@@ -6,9 +6,10 @@ namespace Lucene.Net.Documents
 {
 	public static class DocumentExtentions
 	{
-		public static FieldBuilder AddField(this Document document, String name)
+
+		public static StringFieldBuilder Add(this Document document, String value)
 		{
-			return new FieldBuilder(document, name);
+			return new StringFieldBuilder(document, value);
 		}
 
 		public static Int32FieldBuilder Add(this Document document, Int32 value)
@@ -39,6 +40,11 @@ namespace Lucene.Net.Documents
 		public static DateTimeFieldBuilder Add(this Document document, DateTime value)
 		{
 			return new DateTimeFieldBuilder(document, value);
+		}
+
+		public static SerializedObjectFieldBuilder Add(this Document document, Object value)
+		{
+			return new SerializedObjectFieldBuilder(document, value);
 		}
 
 		public static String GetString(this Document document, String name)
@@ -236,42 +242,6 @@ namespace Lucene.Net.Documents
 			}
 
 			return result;
-		}
-
-		public static T? GetValue<T>(this Document doc, String name) where T : struct, IConvertible
-		{
-			var value = doc.GetValueOrNull<T>(name);
-
-			if(value == null)
-			{
-				throw new InvalidOperationException("Document does not contain a field named " + name);
-			}
-
-			return value;
-		}
-
-		public static T? GetValueOrNull<T>(this Document doc, String name) where T : struct, IConvertible
-		{
-			var value = doc.Get(name);
-			if (string.IsNullOrWhiteSpace(value))
-			{
-				return null;
-			}
-
-			if(typeof(T) == typeof(Boolean))
-			{
-				if(value == "1")
-				{
-					value = "True";
-				}
-
-				if (value == "0")
-				{
-					value = "False";
-				}
-			}
-
-			return (T)Convert.ChangeType(value, typeof(T));
 		}
 	}
 }
