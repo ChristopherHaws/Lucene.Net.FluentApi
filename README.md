@@ -70,7 +70,7 @@ void Main()
 	document.GetDouble("DoubleField");
 	document.GetBoolean("BooleanField");
 	document.GetDateTime("DateTimeField", DateTimeKind.Utc);
-	document.GetString("MyBoostedString");
+	document.GetString("BoostedStringField");
 }
 
 public class ClassWithFieldAttributes
