@@ -1,6 +1,6 @@
 using System;
 
-namespace Lucene.Net.Fluent.Documents.FieldAttributes
+namespace Lucene.Net.Fluent.Extentions
 {
 	internal static class TypeExtentions
 	{

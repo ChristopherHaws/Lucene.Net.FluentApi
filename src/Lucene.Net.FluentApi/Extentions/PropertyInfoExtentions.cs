@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Lucene.Net.Fluent.Documents.FieldAttributes
+namespace Lucene.Net.Fluent.Extentions
 {
 	public static class PropertyInfoExtentions
 	{
