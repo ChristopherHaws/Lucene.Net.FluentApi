@@ -8,7 +8,8 @@ namespace Lucene.Net.Fluent.Documents.FieldAttributes
 	{
 	    public FieldAttribute()
 	    {
-
+			this.Store = true;
+			this.Boost = 1.0f;
 		}
 
 		public IndexMode IndexMode { get; set; }
