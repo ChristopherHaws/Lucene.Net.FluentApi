@@ -42,7 +42,7 @@ document.GetString("BoostedStringField");
 ```
 
 
-Adding and Reading fields via FieldAttribute and NumericFieldAttribute
+Adding and Reading fields via Attributes
 ------------------------------------------------------------
 ```c#
 void Main()
@@ -96,7 +96,7 @@ public class ClassWithFieldAttributes
 	[NumericField(Index = true, Store = true)]
 	public DateTime DateTimeField { get; set; }
 
-	[NumericField(Index = true, Store = true, Boost = 5.0d)]
+	[Field(Index = true, Store = true, Boost = 5.0d)]
 	public String BoostedStringField { get; set; }
 }
 ```
