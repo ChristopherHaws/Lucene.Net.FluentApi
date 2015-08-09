@@ -22,107 +22,48 @@ namespace Lucene.Net.Fluent.Documents.FieldAttributes
 
 			foreach (var fieldAttributeInfo in fieldAttributeInfos)
 			{
+				if (fieldAttributeInfo.Value == null)
+				{
+					continue;
+				}
+
+				var field = new NumericField(
+					fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name,
+					fieldAttributeInfo.Settings.PrecisionStep,
+					fieldAttributeInfo.Settings.Store ? Field.Store.YES : Field.Store.NO,
+					fieldAttributeInfo.Settings.Index
+				);
+
 				if (fieldAttributeInfo.Value is Int32)
 				{
-					var builder = this.document.Add((Int32) fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetIntValue((Int32) fieldAttributeInfo.Value);
 				}
-
-				if (fieldAttributeInfo.Value is Int64)
+				else if (fieldAttributeInfo.Value is Int64)
 				{
-					var builder = this.document.Add((Int64)fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetLongValue((Int64)fieldAttributeInfo.Value);
 				}
-
-				if (fieldAttributeInfo.Value is Single)
+				else if (fieldAttributeInfo.Value is Single)
 				{
-					var builder = this.document.Add((Single)fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetFloatValue((Single)fieldAttributeInfo.Value);
 				}
-
-				if (fieldAttributeInfo.Value is Double)
+				else if (fieldAttributeInfo.Value is Double)
 				{
-					var builder = this.document.Add((Double)fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetDoubleValue((Double)fieldAttributeInfo.Value);
 				}
-
-				if (fieldAttributeInfo.Value is Boolean)
+				else if (fieldAttributeInfo.Value is Boolean)
 				{
-					var builder = this.document.Add((Boolean)fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetIntValue((Boolean)fieldAttributeInfo.Value ? 1 : 0);
 				}
-
-				if (fieldAttributeInfo.Value is DateTime)
+				else if (fieldAttributeInfo.Value is DateTime)
 				{
-					var builder = this.document.Add((DateTime)fieldAttributeInfo.Value);
-
-					if (fieldAttributeInfo.Settings.Store)
-					{
-						builder.Stored();
-					}
-
-					if (fieldAttributeInfo.Settings.Index)
-					{
-						builder.Indexed().WithPrecisionStep(fieldAttributeInfo.Settings.PrecisionStep);
-					}
-
-					builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
+					field.SetLongValue(((DateTime) fieldAttributeInfo.Value).Ticks);
 				}
+				else
+				{
+                    throw new InvalidOperationException($"{fieldAttributeInfo.Value.GetType().FullName} is not a valid numeric field type for '{typeof(T).FullName}.{fieldAttributeInfo.Name}'.");
+                }
+
+				this.document.Add(field);
 			}
 		}
 	}
