@@ -96,7 +96,7 @@ public class ClassWithFieldAttributes
 	[NumericField(Index = true, Store = true)]
 	public DateTime DateTimeField { get; set; }
 
-	[Field(Index = true, Store = true, Boost = 5.0d)]
+	[Field(IndexMode = IndexMode.Analyzed, Store = true, Boost = 5.0d)]
 	public String BoostedStringField { get; set; }
 }
 ```
