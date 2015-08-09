@@ -1,3 +1,5 @@
+using Lucene.Net.Fluent.Documents.Types;
+
 namespace Lucene.Net.Fluent.Documents.FieldProperties
 {
 	public interface ICanBeCompressed<out TResult>

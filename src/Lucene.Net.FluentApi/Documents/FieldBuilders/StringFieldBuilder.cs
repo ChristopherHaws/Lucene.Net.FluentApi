@@ -2,6 +2,7 @@ using System;
 using Lucene.Net.Documents;
 using Lucene.Net.Fluent.Documents.FieldProperties;
 using Lucene.Net.Fluent.Documents.FieldPropertyBuilders;
+using Lucene.Net.Fluent.Documents.Types;
 
 namespace Lucene.Net.Fluent.Documents.FieldBuilders
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Lucene.Net.Fluent.Documents.Types;
 
 namespace Lucene.Net.Fluent.Documents.FieldAttributes
 {

@@ -1,6 +1,6 @@
 ﻿using Lucene.Net.Documents;
 
-namespace Lucene.Net.Fluent.Documents.FieldAttributes
+namespace Lucene.Net.Fluent.Documents.Types
 {
 	public enum IndexMode
 	{

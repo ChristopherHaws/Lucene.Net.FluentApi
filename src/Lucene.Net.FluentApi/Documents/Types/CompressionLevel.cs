@@ -1,6 +1,6 @@
 using ICSharpCode.SharpZipLib.Zip.Compression;
 
-namespace Lucene.Net.Fluent.Documents.FieldProperties
+namespace Lucene.Net.Fluent.Documents.Types
 {
 	public enum CompressionLevel
 	{

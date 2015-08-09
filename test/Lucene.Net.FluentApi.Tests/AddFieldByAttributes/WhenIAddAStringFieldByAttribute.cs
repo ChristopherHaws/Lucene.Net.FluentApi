@@ -1,6 +1,7 @@
 ﻿using System;
 using Lucene.Net.Documents;
 using Lucene.Net.Fluent.Documents.FieldAttributes;
+using Lucene.Net.Fluent.Documents.Types;
 using Xunit;
 
 namespace Lucene.Net.FluentApi.Tests.AddFieldByAttributes
@@ -8,24 +9,24 @@ namespace Lucene.Net.FluentApi.Tests.AddFieldByAttributes
     public class WhenIAddAStringFieldByAttribute
     {
 	    [Fact]
-	    public void Bar()
+	    public void ThenIWantItToBeStored()
 	    {
 		    // Arrange
 			var document = new Document();
-			var foo = new ClassWithFieldAttributes
+			var value = new ClassWithFieldAttributes
 			{
 				FieldOne = "Test",
 				FieldTwo = "Test2"
 			};
 
 			// Act
-			document.AddFields(foo);
+			document.AddFields(value);
 
 			// Assert
-			Assert.Equal(foo.FieldOne, document.GetString("FieldOne"));
-			Assert.Equal(foo.FieldTwo, document.GetString("FieldTwo"));
+			Assert.Equal(value.FieldOne, document.GetString("FieldOne"));
+			Assert.Equal(value.FieldTwo, document.GetString("FieldTwo"));
 		}
-    }
+	}
 
 
 	public class ClassWithFieldAttributes
