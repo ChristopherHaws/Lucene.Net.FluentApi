@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Lucene.Net.Fluent.Documents.FieldAttributes;
 using Lucene.Net.Fluent.Documents.FieldBuilders;
 using Lucene.Net.Fluent.Extentions;
 
@@ -10,6 +11,11 @@ namespace Lucene.Net.Documents
 {
 	public static class DocumentExtentions
 	{
+		public static void AddFields<T>(this Document document, T value)
+		{
+			new FieldAttributeBuilder<T>(document, value).Build();
+		}
+
 		public static IStringFieldBuilder Add(this Document document, String value)
 		{
 			return new StringFieldBuilder(document, value);

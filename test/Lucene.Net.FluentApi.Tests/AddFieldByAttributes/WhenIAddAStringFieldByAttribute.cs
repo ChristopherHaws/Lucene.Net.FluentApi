@@ -19,17 +19,12 @@ namespace Lucene.Net.FluentApi.Tests.AddFieldByAttributes
 			};
 
 			// Act
-			this.AddFields(document, foo);
+			document.AddFields(foo);
 
 			// Assert
 			Assert.Equal(foo.FieldOne, document.GetString("FieldOne"));
 			Assert.Equal(foo.FieldTwo, document.GetString("FieldTwo"));
 		}
-
-	    private void AddFields<T>(Document document, T value)
-	    {
-		    new FieldAttributeBuilder<T>(document, value).Build();
-	    }
     }
 
 
