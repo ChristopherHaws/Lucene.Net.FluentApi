@@ -51,8 +51,24 @@ namespace Lucene.Net.Fluent.Documents.FieldAttributes
 						builder.Indexed().WithoutNorms().BoostBy(fieldAttributeInfo.Settings.Boost);
 						break;
 				}
-				
-				builder.As(fieldAttributeInfo.Name);
+
+				switch (fieldAttributeInfo.Settings.TermVector)
+				{
+					case TermVectorMode.Yes:
+						builder.WithTermVector();
+                        break;
+					case TermVectorMode.WithOffsets:
+						builder.WithTermVector().WithOffsets();
+						break;
+					case TermVectorMode.WithPositions:
+						builder.WithTermVector().WithPositions();
+						break;
+					case TermVectorMode.WithPositionsAndOffsets:
+						builder.WithTermVector().WithPositionsAndOffsets();
+						break;
+				}
+
+				builder.As(fieldAttributeInfo.Settings.Name ?? fieldAttributeInfo.Name);
 			}
 		}
 	}

@@ -1,5 +1,4 @@
 using System;
-using System.CodeDom;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -14,6 +13,7 @@ namespace Lucene.Net.Documents
 		public static void AddFields<T>(this Document document, T value)
 		{
 			new FieldAttributeBuilder<T>(document, value).Build();
+			new NumericFieldAttributeBuilder<T>(document, value).Build();
 		}
 
 		public static IStringFieldBuilder Add(this Document document, String value)

@@ -2,10 +2,10 @@ using System;
 
 namespace Lucene.Net.Fluent.Documents.FieldAttributes
 {
-	public class FieldAttributeInfo
+	public class FieldAttributeInfo<TAttribute> where TAttribute : BaseFieldAttribute
 	{
 		public String Name { get; set; }
 
-		public FieldAttribute Settings { get; set; }
+		public TAttribute Settings { get; set; }
 	}
 }

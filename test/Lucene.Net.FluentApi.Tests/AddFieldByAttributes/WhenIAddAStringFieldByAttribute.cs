@@ -28,6 +28,27 @@ namespace Lucene.Net.FluentApi.Tests.AddFieldByAttributes
 		}
 	}
 
+	public class WhenIAddAnInt32FieldByAttribute
+	{
+		[Fact]
+		public void ThenIWantItToBeStored()
+		{
+			// Arrange
+			var document = new Document();
+			var input = 5;
+			var value = new ClassWithFieldAttributes
+			{
+				Int32Field = input
+			};
+
+			// Act
+			document.AddFields(value);
+
+			// Assert
+			Assert.Equal(input, document.GetInt32("Int32Field"));
+		}
+	}
+
 
 	public class ClassWithFieldAttributes
 	{
@@ -36,5 +57,8 @@ namespace Lucene.Net.FluentApi.Tests.AddFieldByAttributes
 
 		[Field(IndexMode = IndexMode.Analyzed, Store = true)]
 		public String FieldTwo { get; set; }
+
+		[NumericField(Index = true, Store = true)]
+		public Int32 Int32Field { get; set; }
 	}
 }
